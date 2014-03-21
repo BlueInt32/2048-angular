@@ -1,0 +1,17 @@
+﻿body {
+  font-family: verdana;
+}
+table tr td {
+  color: #48557a;
+  font-size: 3em;
+  width: 120px;
+  height: 120px;
+  background-color: #bbc7e8;
+  text-align: center;
+  border: 1px solid #798bbd;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  overflow: hidden;
+}
+/*# sourceMappingURL=styles.css.map */
