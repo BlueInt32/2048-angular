@@ -1,17 +1,58 @@
-﻿body {
+﻿body div#container {
   font-family: verdana;
+  position: relative;
 }
-table tr td {
+body div#container table {
+  border-spacing: 0;
+}
+body div#container tr td {
   color: #48557a;
   font-size: 3em;
   width: 120px;
   height: 120px;
   background-color: #bbc7e8;
   text-align: center;
-  border: 1px solid #798bbd;
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   overflow: hidden;
+  border-spacing: 0;
+}
+body div#container input.smallInput {
+  width: 50px;
+}
+body div#container div.value {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  padding: 0;
+  color: #f00;
+  line-height: 120px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+body div#container div.value.x0 {
+  left: 0;
+}
+body div#container div.value.x1 {
+  left: 120px;
+}
+body div#container div.value.x2 {
+  left: 240px;
+}
+body div#container div.value.x3 {
+  left: 360px;
+}
+body div#container div.value.y0 {
+  top: 0;
+}
+body div#container div.value.y1 {
+  top: 120px;
+}
+body div#container div.value.y2 {
+  top: 240px;
+}
+body div#container div.value.y3 {
+  top: 360px;
 }
 /*# sourceMappingURL=styles.css.map */

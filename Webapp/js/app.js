@@ -1,9 +1,22 @@
 ﻿var app = angular.module('app', ['textFilters']);
 
+app
+
 app.controller('mainCtrl', function ($scope, $rootScope, $document)
 {
 	$scope.addMode = true;
-	var init = function (addMode)
+	$scope.autoSetFirstValues = true;
+	$scope.val = new Array();
+	$scope.items = new Array();
+
+	$scope.$watch('val', function ()
+	{
+		console.log("Update items !");
+		$scope.lookupValues();
+	}, true);
+
+	//#region init
+	var init = function ()
 	{
 		$scope.val = new Array();
 		for (var i = 0; i < 4; i++)
@@ -16,14 +29,26 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 		}
 		$scope.val[1][1] = 2;
 		$scope.val[2][3] = 2;
-
+		if ($scope.autoSetFirstValues)
+			$scope.setFirst2Values(1, 1, 2, 2, 3, 2);
+		$scope.lookupValues();
 		$document.bind("keydown", $scope.keyMove);
 	}
 
-	$scope.getValue = function (x, y)
+	//#endregion
+
+	//#region setFirst2Values 
+	$scope.setFirst2Values = function (x1, y1, v1, x2, y2, v2)
 	{
-		return $scope.val[x-1][y-1];
+		$scope.val[x1][y1] = v1;
+		$scope.val[x2][y2] = v2;
 	}
+	//#endregion
+
+
+	//#region keyMove 
+
+
 	$scope.keyMove = function (event)
 	{
 		switch (event.which)
@@ -35,11 +60,15 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 			default: break;
 		}
 		$scope.$digest();
-	} 
-	$scope.globalMove = function(direction)
-	{ 
-		// lookup Values
-		var items = $scope.lookupValues();
+	}
+	//#endregion
+
+	//#region globalMove 
+
+	$scope.globalMove = function (direction)
+	{
+		// lookup Values, generates the items array for the multiple array
+		$scope.lookupValues();
 
 		var somethingHappened = true;
 
@@ -49,9 +78,9 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 		{
 			somethingHappened = false;
 			// process items
-			for (var i = 0; i < items.length; i++)
+			for (var i = 0; i < $scope.items.length; i++)
 			{
-				var item = items[i];
+				var item = $scope.items[i];
 
 				if ($scope.canMove(item, direction))
 				{
@@ -66,31 +95,39 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 				for (var j = 0; j < 4; j++)
 				{
 					$scope.val[i][j] = 0;
-					if(!somethingHappened) emptySquaresIndex.push({ x: i, y: j });
+					if (!somethingHappened) emptySquaresIndex.push({ x: i, y: j });
 				}
 			}
 
-			// remap items to val
-			for (var i = 0; i < items.length; i++)
+			// remap $scope.items to val
+			for (var i = 0; i < $scope.items.length; i++)
 			{
-				var item = items[i];
+				var item = $scope.items[i];
 				$scope.val[item.x][item.y] = $scope.val[item.x][item.y] != 0 ? 2 * item.v : item.v;
 				emptySquaresIndex.pop(item.y + 4 * item.x);
 			}
 			occurences++;
 		}
-		console.log("occ = " + occurences);
 		if (occurences > 1 && $scope.addMode)
 		{
-			console.log("dispo: " + emptySquaresIndex.length);
 			// add a value somewhere
 			var rand = Math.floor((Math.random() * emptySquaresIndex.length));
-			console.log("rand=" + rand);
-			$scope.val[Math.floor(rand / 4)][rand % 4] = 2;
-			console.log("Math.floor(rand / 4)=" + Math.floor(rand / 4));
-			console.log("rand % 4=" + rand % 4);
+			var coord = { x: Math.floor(rand / 4), y: rand % 4 };
+			$scope.addValue(coord.x, coord.y, 2);
+			//$scope.val[Math.floor(rand / 4)][rand % 4] = 2;
 		}
 	}
+	//#endregion
+
+	//#region addValue 
+	$scope.addValue = function (x, y, val)
+	{
+		$scope.val[x][y] = val;
+		//$scope.lookupValues();
+	}
+	//#endregion
+
+	//#region oneMove 
 
 	$scope.oneMove = function (item, direction)
 	{
@@ -103,8 +140,11 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 		}
 		return item;
 	};
+	//#endregion
 
-	$scope.canMove = function(item, direction)
+	//#region canMove 
+
+	$scope.canMove = function (item, direction)
 	{
 		var vals = $scope.val;
 		var adjacentItem;
@@ -124,20 +164,22 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 				break;
 		}
 		var canMove = adjacentItem != 0 ? adjacentItem == item.v : true;
-		console.log("[" + item.x + "," + item.y + "] canMove ? " + canMove);
 		return canMove;
 	}
+	//#endregion
+
+	//#region lookupValues
 
 	$scope.lookupValues = function ()
 	{
-		var items = new Array();
+		$scope.items = new Array();
 		for (var i = 0; i < 4; i++)
 		{
 			for (var j = 0; j < 4; j++)
 			{
 				if ($scope.val[i][j] != 0)
 				{
-					items.push(
+					$scope.items.push(
 						{
 							x: i,
 							y: j,
@@ -146,8 +188,11 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 				}
 			}
 		}
-		return items;
+		return $scope.items;
 	}
+	//#endregion
+
+
 	init();
 });
 

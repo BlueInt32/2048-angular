@@ -1,18 +1,54 @@
 ﻿@import "mixin.less";
-	
-body {
-	font-family: verdana;
+
+body 
+{
+	div#container
+	{
+		font-family: verdana;
+		position:relative;
+
+		table
+		{
+			border-spacing: 0;
+		}
+		tr td 
+		{
+			color: @textColor;
+			font-size: 3em;
+			width: @squareSize;
+			height: @squareSize;
+			background-color: @squareColor;
+			text-align: center;
+			.borderradius(10px);
+			overflow: hidden;
+			border-spacing: 0;
+		}
+		input.smallInput 
+		{
+			width:50px;
+		}
+		div.value 
+		{
+			position: absolute;
+			width: @squareSize;
+			height: @squareSize;
+			padding: 0;
+			color: #f00;
+			//border:1px solid black;
+			line-height:@squareSize;
+			text-align: center;
+			background-color: rgba(0, 0, 0,0.2);
+
+			&.x0 {left: 0;}
+			&.x1 {left: @squareSize * 1;}
+			&.x2 {left: @squareSize * 2;}
+			&.x3 {left: @squareSize * 3;}
+
+			&.y0 {top: 0;}
+			&.y1 {top: @squareSize * 1;}
+			&.y2 {top: @squareSize * 2;}
+			&.y3 {top: @squareSize * 3;}
+		}
+	}
 }
 
-table tr td 
-{
-	color:@textColor;
-	font-size: 3em;
-	width: @squareSize;
-	height: @squareSize;
-	background-color: @squareColor;
-	text-align: center;
-	border: 1px solid @borderColor;
-	.borderradius(10px);
-	overflow:hidden;
-}
