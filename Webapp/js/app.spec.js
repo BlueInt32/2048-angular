@@ -9,12 +9,11 @@
 		{
 			var scope = {}, ctrl = $controller('mainCtrl', { $scope: scope });
 			
-
 			scope.autoSetFirstValues = false;
 			scope.setFirst2Values(1, 1, 2, 2, 3, 2);
 
 			expect(scope.items.toBeDefined);
-
+			 
 			expect(scope.val[1][1]).toBe(2);
 			expect(scope.val[2][3]).toBe(2);
 			expect(scope.val[0][0]).toBe(0);
@@ -30,7 +29,7 @@
 
 	describe('move Up', function ()
 	{
-		it('have a move correct behaviour', inject(function ($controller)
+		it('should have a move correct behaviour', inject(function ($controller)
 		{
 			var scope = {}, ctrl = $controller('mainCtrl', { $scope: scope });
 			

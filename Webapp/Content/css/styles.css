@@ -29,30 +29,45 @@ body div#container div.value {
   color: #f00;
   line-height: 120px;
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: #000;
 }
 body div#container div.value.x0 {
   left: 0;
+  background: #000;
 }
 body div#container div.value.x1 {
   left: 120px;
+  background-color: #FFF;
 }
 body div#container div.value.x2 {
   left: 240px;
+  background-color: #FFF;
 }
 body div#container div.value.x3 {
   left: 360px;
+  background-color: #FFF;
 }
 body div#container div.value.y0 {
   top: 0;
+  background: #000;
 }
 body div#container div.value.y1 {
   top: 120px;
+  background-color: #FFF;
 }
 body div#container div.value.y2 {
   top: 240px;
+  background-color: #FFF;
 }
 body div#container div.value.y3 {
   top: 360px;
+  background-color: #FFF;
+}
+body div#container div.value .ng-enter,
+body div#container div.value .ng-leave,
+body div#container div.value .ng-move {
+  -webkit-transition: 0.5s linear all;
+  transition: 0.5s linear all;
+  position: relative;
 }
 /*# sourceMappingURL=styles.css.map */

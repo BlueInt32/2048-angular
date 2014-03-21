@@ -1,53 +1,30 @@
 ﻿var app = angular.module('app', ['textFilters']);
 
-app
-
 app.controller('mainCtrl', function ($scope, $rootScope, $document)
 {
 	$scope.addMode = true;
 	$scope.autoSetFirstValues = true;
-	$scope.val = new Array();
 	$scope.items = new Array();
-
-	$scope.$watch('val', function ()
-	{
-		console.log("Update items !");
-		$scope.lookupValues();
-	}, true);
 
 	//#region init
 	var init = function ()
 	{
-		$scope.val = new Array();
-		for (var i = 0; i < 4; i++)
-		{
-			$scope.val[i] = new Array();
-			for (var j = 0; j < 4; j++)
-			{
-				$scope.val[i][j] = 0;
-			}
-		}
-		$scope.val[1][1] = 2;
-		$scope.val[2][3] = 2;
 		if ($scope.autoSetFirstValues)
 			$scope.setFirst2Values(1, 1, 2, 2, 3, 2);
-		$scope.lookupValues();
 		$document.bind("keydown", $scope.keyMove);
 	}
 
 	//#endregion
 
-	//#region setFirst2Values 
 	$scope.setFirst2Values = function (x1, y1, v1, x2, y2, v2)
 	{
-		$scope.val[x1][y1] = v1;
-		$scope.val[x2][y2] = v2;
+		$scope.items.push({ x: x1, y: y1, v: v1, fusion:false, destroy:false });
+		$scope.items.push({ x: x2, y: y2, v: v2, fusion: false, destroy: false });
+
 	}
 	//#endregion
 
-
 	//#region keyMove 
-
 
 	$scope.keyMove = function (event)
 	{
@@ -67,9 +44,6 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 
 	$scope.globalMove = function (direction)
 	{
-		// lookup Values, generates the items array for the multiple array
-		$scope.lookupValues();
-
 		var somethingHappened = true;
 
 		var emptySquaresIndex = new Array();
@@ -89,22 +63,19 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 				}
 			}
 
-			// Empty val Array
+			//// Empty val Array
 			for (var i = 0; i < 4; i++)
 			{
 				for (var j = 0; j < 4; j++)
 				{
-					$scope.val[i][j] = 0;
 					if (!somethingHappened) emptySquaresIndex.push({ x: i, y: j });
 				}
 			}
-
-			// remap $scope.items to val
 			for (var i = 0; i < $scope.items.length; i++)
 			{
 				var item = $scope.items[i];
-				$scope.val[item.x][item.y] = $scope.val[item.x][item.y] != 0 ? 2 * item.v : item.v;
 				emptySquaresIndex.pop(item.y + 4 * item.x);
+				
 			}
 			occurences++;
 		}
@@ -116,13 +87,15 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 			$scope.addValue(coord.x, coord.y, 2);
 			//$scope.val[Math.floor(rand / 4)][rand % 4] = 2;
 		}
+		console.log($scope.items);
 	}
 	//#endregion
 
 	//#region addValue 
 	$scope.addValue = function (x, y, val)
 	{
-		$scope.val[x][y] = val;
+		//$scope.val[x][y] = val;
+		$scope.items.push({x: x, y:y, v:val, fusion:false, destroy:false});
 		//$scope.lookupValues();
 	}
 	//#endregion
@@ -138,6 +111,9 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 			case "up": item.y = item.y - 1; break;
 			case "down": item.y = item.y + 1; break;
 		}
+		if (item.fusion)
+			item.v = 2 * item.v;
+
 		return item;
 	};
 	//#endregion
@@ -146,53 +122,50 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 
 	$scope.canMove = function (item, direction)
 	{
-		var vals = $scope.val;
-		var adjacentItem;
+		var adjacentItem = $scope.getAdjacent(item, direction);
 		switch (direction)
 		{
 			case "left": if (item.x == 0) return false;
-				adjacentItem = vals[item.x - 1][item.y];
 				break;
 			case "right": if (item.x == 3) return false;
-				adjacentItem = vals[item.x + 1][item.y];
 				break;
 			case "up": if (item.y == 0) return false;
-				adjacentItem = vals[item.x][item.y - 1];
 				break;
 			case "down": if (item.y == 3) return false;
-				adjacentItem = vals[item.x][item.y + 1];
 				break;
 		}
-		var canMove = adjacentItem != 0 ? adjacentItem == item.v : true;
-		return canMove;
+		if (typeof adjacentItem == 'undefined')
+			return true;
+		if (adjacentItem.v != item.v)
+		{
+			return false;
+		}
+		else
+		{
+			item.fusion = true;
+			adjacentItem.destroy = true;
+		}
+		return true;
 	}
 	//#endregion
 
-	//#region lookupValues
-
-	$scope.lookupValues = function ()
+	$scope.getAdjacent = function(item, direction)
 	{
-		$scope.items = new Array();
-		for (var i = 0; i < 4; i++)
+		for (var i = 0; i < $scope.items; i++)
 		{
-			for (var j = 0; j < 4; j++)
+			switch (direction)
 			{
-				if ($scope.val[i][j] != 0)
-				{
-					$scope.items.push(
-						{
-							x: i,
-							y: j,
-							v: $scope.val[i][j]
-						});
-				}
+				case "left": if ($scope.items[i].x == item.x - 1) return $scope.items[i];
+					break;
+				case "right": if ($scope.items[i].x == item.x + 1) return $scope.items[i];
+					break;
+				case "up": if ($scope.items[i].x == item.y - 1) return $scope.items[i];
+					break;
+				case "down": if ($scope.items[i].x == item.y + 1) return $scope.items[i];
+					break;
 			}
 		}
-		return $scope.items;
 	}
-	//#endregion
-
-
 	init();
 });
 

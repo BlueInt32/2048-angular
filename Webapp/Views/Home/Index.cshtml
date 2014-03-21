@@ -12,44 +12,16 @@
 <body ng-app="app" ng-controller="mainCtrl as control">
 	<div id="container">
 
-
-
 		<div class="value x{{item.x}} y{{item.y}}" ng-repeat="item in items">[{{item.x}}-{{item.y}}]={{item.v}}</div>
 
-
-		<table ng-keydown="console.log($event)">
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+		<table ng-keydown="console.log($event)" ng-init="line=[1, 2, 3, 4]">
+			<tr ng-repeat="square in line">
+				<td ng-repeat="square in line"></td>
 			</tr>
 		</table>
+		<div class="commands" ng-init="directions=[{t:'left', v:'◄'}, {t:'right', v:'►'}, {t:'up', v:'▲'}, {t:'down', v:'▼'}]">
+			<input type="button" ng-repeat="dir in directions" value="{{dir.v}}" ng-click="globalMove(dir.t);" />
 
-
-		<div class="command">
-			<input type="button" value="G" ng-click="globalMove('left');" />
-			<input type="button" value="D" ng-click="globalMove('right');" />
-			<input type="button" value="H" ng-click="globalMove('up');" />
-			<input type="button" value="B" ng-click="globalMove('down');" />
 
 			<input type="text" value="" ng-model="newX" class="smallInput" />
 			<input type="text" value="" ng-model="newY" class="smallInput" />
@@ -60,6 +32,7 @@
 
 
 	<script src="~/js/bower_components/angular/angular.js"></script>
+	<script src="~/js/bower_components/angular/angular-animate.js"></script>
 	<script src="~/js/app.js"></script>
 </body>
 </html>

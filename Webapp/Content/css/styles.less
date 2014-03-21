@@ -37,17 +37,24 @@ body
 			//border:1px solid black;
 			line-height:@squareSize;
 			text-align: center;
-			background-color: rgba(0, 0, 0,0.2);
+			background-color: #000;
 
-			&.x0 {left: 0;}
-			&.x1 {left: @squareSize * 1;}
-			&.x2 {left: @squareSize * 2;}
-			&.x3 {left: @squareSize * 3;}
 
-			&.y0 {top: 0;}
-			&.y1 {top: @squareSize * 1;}
-			&.y2 {top: @squareSize * 2;}
-			&.y3 {top: @squareSize * 3;}
+			&.x0 { left: 0; background:#000;}
+			&.x1 { left: @squareSize * 1; background-color:#FFF;}
+			&.x2 { left: @squareSize * 2; background-color:#FFF;}
+			&.x3 { left: @squareSize * 3; background-color:#FFF;}
+				   
+			&.y0 { top: 0; background:#000;}
+			&.y1 { top: @squareSize * 1; background-color:#FFF;}
+			&.y2 { top: @squareSize * 2; background-color:#FFF;}
+			&.y3 { top: @squareSize * 3; background-color:#FFF;}
+
+			.ng-enter, .ng-leave, .ng-move {
+			  -webkit-transition: 0.5s linear all;
+			  transition: 0.5s linear all;
+			  position:relative;
+			}
 		}
 	}
 }
