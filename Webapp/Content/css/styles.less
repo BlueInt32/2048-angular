@@ -19,9 +19,10 @@ body
 			height: @squareSize;
 			background-color: @squareColor;
 			text-align: center;
-			.borderradius(10px);
+			.borderradius(5px);
 			overflow: hidden;
 			border-spacing: 0;
+			padding:0;
 		}
 		input.smallInput 
 		{
@@ -35,25 +36,34 @@ body
 			padding: 0;
 			color: #f00;
 			//border:1px solid black;
-			line-height:@squareSize;
-			text-align: center;
-			background-color: #000;
+			.borderradius(5px);
 
+			transition: 0.1s ease-out all;
 
-			&.x0 { left: 0; background:#000;}
-			&.x1 { left: @squareSize * 1; background-color:#FFF;}
-			&.x2 { left: @squareSize * 2; background-color:#FFF;}
-			&.x3 { left: @squareSize * 3; background-color:#FFF;}
+			&.x0 { left: 0; }
+			&.x1 { left: @squareSize * 1; }
+			&.x2 { left: @squareSize * 2;}
+			&.x3 { left: @squareSize * 3; }
 				   
-			&.y0 { top: 0; background:#000;}
-			&.y1 { top: @squareSize * 1; background-color:#FFF;}
-			&.y2 { top: @squareSize * 2; background-color:#FFF;}
-			&.y3 { top: @squareSize * 3; background-color:#FFF;}
-
+			&.y0 { top: 0;}
+			&.y1 { top: @squareSize * 1; }
+			&.y2 { top: @squareSize * 2; }
+			&.y3 { top: @squareSize * 3; }
+			
+			background-color: rgba(255, 255, 255, 0.3);
 			.ng-enter, .ng-leave, .ng-move {
 			  -webkit-transition: 0.5s linear all;
 			  transition: 0.5s linear all;
 			  position:relative;
+			}
+
+
+			div.coord {font-size:8px;}
+			div.val {
+				font-size:32px;
+			line-height:@squareSize;
+			text-align: center;
+
 			}
 		}
 	}

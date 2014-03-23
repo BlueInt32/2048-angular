@@ -12,7 +12,10 @@
 <body ng-app="app" ng-controller="mainCtrl as control">
 	<div id="container">
 
-		<div class="value x{{item.x}} y{{item.y}}" ng-repeat="item in items">[{{item.x}}-{{item.y}}]={{item.v}}</div>
+		<div class="value x{{item.x}} y{{item.y}}" ng-repeat="item in items">
+			<div class="coord">[{{item.x}}-{{item.y}}]</div>
+			<div class="val">{{item.v}}</div>
+		</div>
 
 		<table ng-keydown="console.log($event)" ng-init="line=[1, 2, 3, 4]">
 			<tr ng-repeat="square in line">
