@@ -1,9 +1,9 @@
-﻿var app = angular.module('app', ['textFilters']);
+﻿var app = angular.module('app', ['textFilters', 'ngAnimate']);
 
 app.controller('mainCtrl', function ($scope, $rootScope, $document)
 {
 	$scope.addMode = true;
-	$scope.autoSetFirstValues = true;
+	$scope.autoInit = true;
 	$scope.items = new Array();
 	$scope.availableSquares = new Array();
 
@@ -17,14 +17,11 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 				$scope.setSquareState(i, j, true);
 			}
 		}
-		if ($scope.autoSetFirstValues)
-			$scope.setFirst2Values(3, 0, 2, 3, 1, 2);
+		$scope.setFirst2Values(3, 0, 2, 3, 1, 2);
 		$document.bind("keydown", $scope.keyMove);
-
 	};
 
 	//#endregion
-
 
 	$scope.setSquareState = function(x, y, isAvailable)
 	{
@@ -43,7 +40,6 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 		var pick = Math.floor(Math.random() * picker.length);
 		return $scope.availableSquares[picker[pick]];
 	};
-
 
 	$scope.setFirst2Values = function(x1, y1, v1, x2, y2, v2)
 	{
@@ -104,13 +100,8 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 
 				if (item.destroy)
 				{
-					console.log("DESTRUCTION !!!");
 					$scope.items.splice(i, 1);
 				}
-				//if (item.fusion)
-				//{
-				//	item.v = 2 * item.v;
-				//}
 			}
 
 			moves++;
@@ -142,12 +133,11 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 		$scope.setSquareState(item.x, item.y, true);
 		switch (direction)
 		{
-			case "left": item.x = item.x - 1; break;
+			case "left": item.x = item.x - 1;  break;
 			case "right": item.x = item.x + 1; break;
 			case "up": item.y = item.y - 1; break;
 			case "down": item.y = item.y + 1; break;
 		}
-
 		$scope.setSquareState(item.x, item.y, false);
 		if (item.fusion)
 		{
@@ -212,7 +202,8 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 			}
 		}
 	};
-	init();
+	if ($scope.autoInit)
+		init();
 });
 
 angular.module('textFilters', []).filter('zeroEmpty', function ()

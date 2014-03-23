@@ -2,70 +2,86 @@
 
 body 
 {
+	font-family:sans-serif;
 	div#container
 	{
 		font-family: verdana;
 		position:relative;
+		margin:auto auto;
+		width: 500px;
 
-		table
+		div#game
 		{
-			border-spacing: 0;
+			position:relative;
+			table
+			{
+				border-spacing: 0;
+			}
+			tr td 
+			{
+				color: @textColor;
+				font-size: 3em;
+				width: @squareSize;
+				height: @squareSize;
+				background-color: @squareColor;
+				text-align: center;
+				.borderradius(5px);
+				overflow: hidden;
+				border-spacing: 0;
+				padding:0;
+			}
+			div.value 
+			{
+				position: absolute;
+				width: @squareSize;
+				height: @squareSize;
+				padding: 0;
+				color: #f00;
+				//border:1px solid black;
+				.borderradius(5px);
+
+				transition: 0.1s cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
+
+				&.x0 { left: 0; }
+				&.x1 { left: @squareSize * 1; }
+				&.x2 { left: @squareSize * 2;}
+				&.x3 { left: @squareSize * 3; }
+				   
+				&.y0 { top: 0;}
+				&.y1 { top: @squareSize * 1; }
+				&.y2 { top: @squareSize * 2; }
+				&.y3 { top: @squareSize * 3; }
+			
+				background-color: rgba(255, 255, 255, 0.3);
+
+
+				.animate-enter {
+					-webkit-transition: 1s linear all; /* Chrome */
+					transition: 0.1s cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
+					opacity: 0;
+				}
+ 
+				.animate-enter.animate-enter-active {
+					opacity: 1;
+				}
+
+
+				div.coord {font-size:8px;}
+				div.val {
+					font-size:32px;
+				line-height:@squareSize;
+				text-align: center;
+
+				}
+			}
 		}
-		tr td 
-		{
-			color: @textColor;
-			font-size: 3em;
-			width: @squareSize;
-			height: @squareSize;
-			background-color: @squareColor;
-			text-align: center;
-			.borderradius(5px);
-			overflow: hidden;
-			border-spacing: 0;
-			padding:0;
-		}
+
+		
 		input.smallInput 
 		{
 			width:50px;
 		}
-		div.value 
-		{
-			position: absolute;
-			width: @squareSize;
-			height: @squareSize;
-			padding: 0;
-			color: #f00;
-			//border:1px solid black;
-			.borderradius(5px);
-
-			transition: 0.1s ease-out all;
-
-			&.x0 { left: 0; }
-			&.x1 { left: @squareSize * 1; }
-			&.x2 { left: @squareSize * 2;}
-			&.x3 { left: @squareSize * 3; }
-				   
-			&.y0 { top: 0;}
-			&.y1 { top: @squareSize * 1; }
-			&.y2 { top: @squareSize * 2; }
-			&.y3 { top: @squareSize * 3; }
-			
-			background-color: rgba(255, 255, 255, 0.3);
-			.ng-enter, .ng-leave, .ng-move {
-			  -webkit-transition: 0.5s linear all;
-			  transition: 0.5s linear all;
-			  position:relative;
-			}
-
-
-			div.coord {font-size:8px;}
-			div.val {
-				font-size:32px;
-			line-height:@squareSize;
-			text-align: center;
-
-			}
-		}
+		
 	}
 }
 

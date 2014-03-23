@@ -83,6 +83,9 @@
     <Content Include="Content\css\styles.css">
       <DependentUpon>styles.less</DependentUpon>
     </Content>
+    <Content Include="Content\css\styles.min.css">
+      <DependentUpon>styles.css</DependentUpon>
+    </Content>
     <Content Include="Global.asax" />
     <Content Include="js\app.js" />
     <Content Include="js\app.spec.js" />
@@ -98,6 +101,7 @@
     </Content>
     <Content Include="Content\css\mixin.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="js\directives.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
