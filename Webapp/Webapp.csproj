@@ -86,6 +86,25 @@
     <Content Include="Content\css\styles.min.css">
       <DependentUpon>styles.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\values.css">
+      <DependentUpon>values.less</DependentUpon>
+    </Content>
+    <Content Include="Content\images\elements\apple.png" />
+    <Content Include="Content\images\elements\barrel.png" />
+    <Content Include="Content\images\elements\book.png" />
+    <Content Include="Content\images\elements\capsule.png" />
+    <Content Include="Content\images\elements\chinaui.png" />
+    <Content Include="Content\images\elements\clock.png" />
+    <Content Include="Content\images\elements\cup.png" />
+    <Content Include="Content\images\elements\knickers.png" />
+    <Content Include="Content\images\elements\mobile telephone.png" />
+    <Content Include="Content\images\elements\rokey.png" />
+    <Content Include="Content\images\elements\shovel.png" />
+    <Content Include="Content\images\elements\toilet paper.png" />
+    <Content Include="Content\images\elements\toothpaste.png" />
+    <Content Include="Content\images\elements\vest.png" />
+    <Content Include="Content\images\elements\www.rokey.net.png" />
+    <Content Include="Content\images\elements\xxxx.png" />
     <Content Include="Global.asax" />
     <Content Include="js\app.js" />
     <Content Include="js\app.spec.js" />
@@ -100,6 +119,12 @@
       <DependentUpon>styles.css</DependentUpon>
     </Content>
     <Content Include="Content\css\mixin.less" />
+    <Content Include="Content\css\offsets.less" />
+    <Content Include="Content\css\values.less" />
+    <Content Include="Content\css\values.css.map">
+      <DependentUpon>values.css</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\Journeyman.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="js\directives.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

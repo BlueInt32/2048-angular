@@ -6,36 +6,38 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width" />
-	<title>Index</title>
+	<title>2048 Maison</title>
 	<link href="~/Content/css/styles.css" rel="stylesheet" />
 </head> 
 	<body ng-app="app" ng-controller="mainCtrl as control">
 		<div id="container">
 			<h1>Angular 2048</h1>
+			<h3>Score : {{score}} </h3>
 			<div id="game">
-			@*<div class="value x{{item.x}} y{{item.y}}" ng-repeat="item in items" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
-				<div class="coord">[{{item.x}}-{{item.y}}]</div>
-				<div class="val">{{item.v}}</div>
-			</div>*@
-				<square bounditem="item" ng-repeat="item in items" ng-transclude>
-					<div class="coord">[{{item.x}}-{{item.y}}]</div>
-					<div class="val">{{item.v}}</div>
+				<square bounditem="item" ng-repeat="item in items" >
+					@*<div class=" coord">[{{item.x}}-{{item.y}}]</div>*@
+					<div class="val" ng-if="showvalue">{{item.v}}</div>
 				</square>
 
+				<div class="debug" >
+					<ul>
+						<li ng-repeat="av in availableSquares">[{{av.x + 1}}-{{av.y + 1}}] {{av.nbItemsInSquare}}</li>
+					</ul>
+				</div>
 
-				<table ng-keydown="console.log($event)" ng-init="line=[1, 2, 3, 4]">
+				<div class="backgroundTiles" ng-init="tiles=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]">
+					<div ng-repeat="tile in tiles"></div>
+				</div>
+
+
+				@*<table ng-keydown="console.log($event)" ng-init="line=[1, 2, 3, 4]">
 					<tr ng-repeat="square in line">
 						<td ng-repeat="square in line"></td>
 					</tr>
-				</table>
+				</table>*@
 				<div class="commands" ng-init="directions=[{t:'left', v:'◄'}, {t:'right', v:'►'}, {t:'up', v:'▲'}, {t:'down', v:'▼'}]">
 					<input type="button" ng-repeat="dir in directions" value="{{dir.v}}" ng-click="globalMove(dir.t);" />
-
-
-					<input type="text" value="" ng-model="newX" class="smallInput" />
-					<input type="text" value="" ng-model="newY" class="smallInput" />
-					<input type="text" value="" ng-model="newV" class="smallInput" />
-					<input type="button" value="ajout" ng-click="addValue(newX, newY, newV)" />
+					| <input type="checkbox" ng-model="showvalue"/> Montrer les valeurs
 				</div>
 
 			</div>

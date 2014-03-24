@@ -1,11 +1,12 @@
 ﻿var app = angular.module('app', ['textFilters', 'ngAnimate']);
 
-app.controller('mainCtrl', function ($scope, $rootScope, $document)
+app.controller('mainCtrl', function ($scope, $rootScope, $document, $timeout)
 {
 	$scope.addMode = true;
 	$scope.autoInit = true;
 	$scope.items = new Array();
 	$scope.availableSquares = new Array();
+	$scope.score = 0;
 
 	//#region init
 	var init = function() 
@@ -17,7 +18,7 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 				$scope.setSquareState(i, j, true);
 			}
 		}
-		$scope.setFirst2Values(3, 0, 2, 3, 1, 2);
+		$scope.initValues([{ x: 3, y: 0, v: 2 }, { x: 3, y: 1, v: 2 }, { x: 3, y: 2, v: 2 }]);
 		$document.bind("keydown", $scope.keyMove);
 	};
 
@@ -27,6 +28,7 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 	{
 		var key = x + 4 * y;
 		var nbItemsInSquare = typeof $scope.availableSquares[key] == 'undefined' ? 0 : $scope.availableSquares[key].nbItemsInSquare;
+
 		nbItemsInSquare = isAvailable ? 0 : nbItemsInSquare + 1;
 		$scope.availableSquares[key] = { x: x, y: y, nbItemsInSquare: nbItemsInSquare };
 	};
@@ -41,12 +43,13 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 		return $scope.availableSquares[picker[pick]];
 	};
 
-	$scope.setFirst2Values = function(x1, y1, v1, x2, y2, v2)
+	$scope.initValues = function (inputArray)
 	{
-		$scope.items.push({ x: x1, y: y1, v: v1, fusion: false, destroy: false });
-		$scope.setSquareState(x1, y1, false);
-		$scope.items.push({ x: x2, y: y2, v: v2, fusion: false, destroy: false });
-		$scope.setSquareState(x2, y2, false);
+		for (var i = 0; i < inputArray.length; i++)
+		{
+			$scope.items.push({ x: inputArray[i].x, y: inputArray[i].y, v: inputArray[i].v, fusion: false, destroy: false, justFusionned: false });
+			$scope.setSquareState(inputArray[i].x, inputArray[i].y, false);
+		}
 	};
 	//#endregion
 
@@ -84,14 +87,9 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 
 				if ($scope.canMove(item, direction))
 				{
-					console.log("item[" + item.x + "-" + item.y + "] can move " + direction);
 					$scope.oneMove(item, direction);
 					someMoveOccured = true;
-				} else
-				{
-					console.log("item[" + item.x + "-" + item.y + "] can NOT move " + direction);
 				}
-				console.log(item);
 			}
 
 			for (var i = 0; i < $scope.items.length; i++)
@@ -106,13 +104,18 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 
 			moves++;
 		}
-		console.dir($scope.items);
-
+		for (var i = 0; i < $scope.items.length; i++)
+		{
+			$scope.items[i].justFusionned = false;
+		}
 		if (moves > 1 && $scope.addMode)
 		{
 			// add a value somewhere
 			var availableSquare = $scope.pickAFreeSquare();
-			$scope.addItem(availableSquare.x, availableSquare.y, 2);
+			$timeout(function ()
+			{
+				$scope.addItem(availableSquare.x, availableSquare.y, 2);
+			}, 200);
 		}
 	};
 	//#endregion
@@ -120,9 +123,8 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 	//#region addItem 
 	$scope.addItem = function(x, y, val)
 	{
-		//$scope.val[x][y] = val;
-		$scope.items.push({ x: x, y: y, v: val, fusion: false, destroy: false });
-		//$scope.lookupValues();
+		$scope.items.push({ x: x, y: y, v: val, fusion: false, destroy: false, justFusionned: false });
+		$scope.setSquareState(x, y, false);
 	};
 	//#endregion
 
@@ -142,7 +144,9 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 		if (item.fusion)
 		{
 			item.v = 2 * item.v;
+			$scope.score = $scope.score + item.v;
 			item.fusion = false;
+			item.justFusionned = true;
 		}
 			
 		return item;
@@ -164,14 +168,12 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 		var adjacentItem = $scope.getAdjacent(item, direction);
 		if (typeof adjacentItem == 'undefined')
 			return true;
-		if (adjacentItem.v != item.v)
+		if (adjacentItem.v != item.v || adjacentItem.justFusionned || item.justFusionned || item.destroy)
 		{
 			return false;
 		} else {
 			item.fusion = true;
-			console.log($scope.logItem(item) + " marked for fusion");
 			adjacentItem.destroy = true;
-			console.log($scope.logItem(adjacentItem) + " marked for deletion");
 		}
 		return true;
 	};
