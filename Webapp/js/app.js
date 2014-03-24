@@ -7,8 +7,8 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document)
 	$scope.items = new Array();
 	$scope.availableSquares = new Array();
 
-	//#region init
-	var init = function()
+	//#region init ta mère.
+	var init = function() 
 	{
 		for (var i = 0; i < 4; i++)
 		{

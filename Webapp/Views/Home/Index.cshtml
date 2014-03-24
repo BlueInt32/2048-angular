@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width" />
 	<title>Index</title>
 	<link href="~/Content/css/styles.css" rel="stylesheet" />
-</head>
+</head> 
 	<body ng-app="app" ng-controller="mainCtrl as control">
 		<div id="container">
 			<h1>Angular 2048</h1>
@@ -17,7 +17,6 @@
 				<div class="coord">[{{item.x}}-{{item.y}}]</div>
 				<div class="val">{{item.v}}</div>
 			</div>*@
-				
 				<square bounditem="item" ng-repeat="item in items" ng-transclude>
 					<div class="coord">[{{item.x}}-{{item.y}}]</div>
 					<div class="val">{{item.v}}</div>
