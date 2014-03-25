@@ -30,7 +30,7 @@
 				</div>
 
 				<div class="commands" ng-init="directions=[{t:'left', v:'◄'}, {t:'right', v:'►'}, {t:'up', v:'▲'}, {t:'down', v:'▼'}]">
-					<input type="button" ng-repeat="dir in directions" value="{{dir.v}}" ng-click="globalMove(dir.t);" />
+					<input type="button" ng-repeat="dir in directions" value="{{dir.v}}" ng-click="sendMove(dir.t);" />
 					| <input type="checkbox" ng-model="showvalue"/> Montrer les valeurs
 				</div>
 

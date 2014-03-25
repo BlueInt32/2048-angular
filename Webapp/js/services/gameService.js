@@ -119,6 +119,7 @@
 				self._lock = false;
 			}, 200);
 		}
+
 	};
 	//#endregion
 

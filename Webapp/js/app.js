@@ -30,6 +30,14 @@ app.controller('mainCtrl', ['$document', '$scope', 'gameService', 'gameServiceCo
 		$scope.showDebug = gameServiceConfig.showDebug;
 	};
 
+	$scope.sendMove = function (direction)
+	{
+		gameService.globalMove(direction, function () { $scope.$digest(); });
+
+		$scope.updateScope();
+		$scope.$digest();
+	}
+
 	$scope.updateScope();
 
 	$document.bind("keydown", $scope.keyboardHandler);
