@@ -1,0 +1,211 @@
+.x0 {
+  left: 0;
+}
+.x1 {
+  left: 122px;
+}
+.x2 {
+  left: 244px;
+}
+.x3 {
+  left: 366px;
+}
+.y0 {
+  top: 0;
+}
+.y1 {
+  top: 122px;
+}
+.y2 {
+  top: 244px;
+}
+.y3 {
+  top: 366px;
+}
+.v2 {
+  background-color: rgba(181, 183, 190, 0.5);
+  background-image: url(../images/elements/apple.png);
+  -moz-background-size: 120px;
+  -o-background-size: 120px;
+  -webkit-background-size: 120px;
+  background-size: 120px;
+}
+.v4 {
+  background-color: rgba(106, 119, 158, 0.5);
+  background-image: url(../images/elements/cup.png);
+  -moz-background-size: 120px;
+  -o-background-size: 120px;
+  -webkit-background-size: 120px;
+  background-size: 120px;
+}
+.v8 {
+  background-color: rgba(150, 171, 232, 0.5);
+  background-image: url(../images/elements/clock.png);
+  -moz-background-size: 120px;
+  -o-background-size: 120px;
+  -webkit-background-size: 120px;
+  background-size: 120px;
+}
+.v16 {
+  background-color: rgba(98, 152, 237, 0.5);
+  background-image: url(../images/elements/capsule.png);
+  -moz-background-size: 120px;
+  -o-background-size: 120px;
+  -webkit-background-size: 120px;
+  background-size: 120px;
+}
+.v32 {
+  background-color: rgba(69, 165, 196, 0.5);
+  background-image: url(../images/elements/book.png);
+  -moz-background-size: 120px;
+  -o-background-size: 120px;
+  -webkit-background-size: 120px;
+  background-size: 120px;
+}
+.v64 {
+  background-color: rgba(21, 177, 235, 0.5);
+  background-image: url("../images/elements/toilet paper.png");
+  -moz-background-size: 120px;
+  -o-background-size: 120px;
+  -webkit-background-size: 120px;
+  background-size: 120px;
+}
+.v128 {
+  background-color: rgba(30, 238, 251, 0.5);
+  background-image: url("../images/elements/mobile telephone.png");
+  -moz-background-size: 120px;
+  -o-background-size: 120px;
+  -webkit-background-size: 120px;
+  background-size: 120px;
+}
+.v256 {
+  background-color: rgba(0, 255, 138, 0.5);
+  background-image: url(../images/elements/shovel.png);
+  -moz-background-size: 120px;
+  -o-background-size: 120px;
+  -webkit-background-size: 120px;
+  background-size: 120px;
+}
+.v512 {
+  background-color: rgba(18, 255, 0, 0.5);
+  background-image: url(../images/elements/toothpaste.png);
+  -moz-background-size: 120px;
+  -o-background-size: 120px;
+  -webkit-background-size: 120px;
+  background-size: 120px;
+}
+.v1024 {
+  background-color: rgba(190, 255, 0, 0.5);
+  background-image: url(../images/elements/apple.png);
+  -moz-background-size: 120px;
+  -o-background-size: 120px;
+  -webkit-background-size: 120px;
+  background-size: 120px;
+}
+.v2048 {
+  background-color: rgba(255, 158, 4, 0.5);
+  background-image: url(../images/elements/apple.png);
+  -moz-background-size: 120px;
+  -o-background-size: 120px;
+  -webkit-background-size: 120px;
+  background-size: 120px;
+}
+.v4096 {
+  background-color: rgba(237, 65, 33, 0.5);
+  background-image: url(../images/elements/apple.png);
+  -moz-background-size: 120px;
+  -o-background-size: 120px;
+  -webkit-background-size: 120px;
+  background-size: 120px;
+}
+.v8192 {
+  background-color: rgba(255, 0, 0, 0.5);
+  background-image: url(../images/elements/apple.png);
+  -moz-background-size: 120px;
+  -o-background-size: 120px;
+  -webkit-background-size: 120px;
+  background-size: 120px;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: sans-serif;
+}
+body div#container {
+  font-family: verdana;
+  position: relative;
+  margin: auto auto;
+  width: 500px;
+}
+body div#container div#game {
+  position: relative;
+}
+body div#container div#game .debug {
+  left: 580px;
+  height: 600px;
+  border: 1px solid black;
+  width: 300px;
+  position: absolute;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  font-family: 'consolas';
+}
+body div#container div#game div.backgroundTiles div {
+  margin: 0px 2px 2px 0px;
+  background-color: rgba(187, 199, 232, 0.5);
+  float: left;
+  width: 120px;
+  height: 120px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+body div#container div#game div.value {
+  display: block;
+  padding: 0px;
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  transition: 0.1s ease-in-out all;
+}
+body div#container div#game div.value div.coord {
+  font-size: 8px;
+}
+body div#container div#game div.value div.val {
+  margin: 3px;
+  color: inherit;
+  font-size: 0.5e;
+}
+body div#container div#game div.value.ng-enter,
+body div#container div#game div.value.ng-leave,
+body div#container div#game div.value.ng-move {
+  transition: 0.1s ease-in-out all;
+}
+body div#container div#game div.value.ng-enter {
+  opacity: 0;
+}
+body div#container div#game div.value.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+body div#container div#game div.value.ng-leave {
+  opacity: 1;
+}
+body div#container div#game div.value.ng-leave.ng-leave-active {
+  opacity: 0;
+}
+body div#container div#game div.value.ng-move {
+  opacity: 0.5;
+  background-color: #F00;
+}
+body div#container div#game div.value.ng-move.ng-move-active {
+  opacity: 1;
+  background-color: #F00;
+}
+body div#container input.smallInput {
+  width: 50px;
+}
