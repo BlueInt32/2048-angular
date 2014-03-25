@@ -80,9 +80,6 @@
     <Content Include="Content\css\mixin.css">
       <DependentUpon>mixin.less</DependentUpon>
     </Content>
-    <Content Include="Content\css\mixin.min.css">
-      <DependentUpon>mixin.css</DependentUpon>
-    </Content>
     <Content Include="Content\css\styles.css">
       <DependentUpon>styles.less</DependentUpon>
     </Content>
@@ -91,9 +88,6 @@
     </Content>
     <Content Include="Content\css\values.css">
       <DependentUpon>values.less</DependentUpon>
-    </Content>
-    <Content Include="Content\css\values.min.css">
-      <DependentUpon>values.css</DependentUpon>
     </Content>
     <Content Include="Content\images\elements\apple.png" />
     <Content Include="Content\images\elements\barrel.png" />
@@ -130,12 +124,9 @@
     <Content Include="Content\css\values.css.map">
       <DependentUpon>values.css</DependentUpon>
     </Content>
-    <None Include="Properties\PublishProfiles\Journeyman-Home.pubxml" />
     <None Include="Properties\PublishProfiles\Journeyman.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="js\bower_components\factories.js" />
     <Content Include="js\directives.js" />
-    <Content Include="js\karma.conf.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -197,11 +188,4 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

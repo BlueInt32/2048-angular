@@ -4,16 +4,13 @@
 
 	describe('Init', function ()
 	{
+
 		it('should init correctly with 2 items', inject(function ($controller)
 		{
 			var scope = {}, ctrl = $controller('mainCtrl', { $scope: scope });
-			
 			expect(scope.items.length).toBe(3);
-			
 		}));
-
 	});
-
 
 	//describe('move Up', function ()
 	//{
@@ -30,6 +27,4 @@
 	//		expect(scope.items.length).toBe(2);
 	//	})); 
 	//});
-
-
 });

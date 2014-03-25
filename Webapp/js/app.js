@@ -201,7 +201,6 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document, $timeout)
 	//};
 
 	////#endregion
-
 	if ($scope.autoInit)
 		init();
 });
