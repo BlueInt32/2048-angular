@@ -25,105 +25,66 @@
 .v2 {
   background-color: rgba(181, 183, 190, 0.5);
   background-image: url(../images/elements/apple.png);
-  -moz-background-size: 120px;
-  -o-background-size: 120px;
-  -webkit-background-size: 120px;
-  background-size: 120px;
+  background-size: 60px;
 }
 .v4 {
   background-color: rgba(106, 119, 158, 0.5);
   background-image: url(../images/elements/cup.png);
-  -moz-background-size: 120px;
-  -o-background-size: 120px;
-  -webkit-background-size: 120px;
-  background-size: 120px;
+  background-size: 72px;
 }
 .v8 {
   background-color: rgba(150, 171, 232, 0.5);
   background-image: url(../images/elements/xxxx.png);
-  -moz-background-size: 120px;
-  -o-background-size: 120px;
-  -webkit-background-size: 120px;
-  background-size: 120px;
+  background-size: 84px;
 }
 .v16 {
   background-color: rgba(98, 152, 237, 0.5);
   background-image: url(../images/elements/capsule.png);
-  -moz-background-size: 120px;
-  -o-background-size: 120px;
-  -webkit-background-size: 120px;
-  background-size: 120px;
+  background-size: 96px;
 }
 .v32 {
   background-color: rgba(69, 165, 196, 0.5);
   background-image: url(../images/elements/book.png);
-  -moz-background-size: 120px;
-  -o-background-size: 120px;
-  -webkit-background-size: 120px;
-  background-size: 120px;
+  background-size: 108px;
 }
 .v64 {
   background-color: rgba(21, 177, 235, 0.5);
   background-image: url("../images/elements/toilet paper.png");
-  -moz-background-size: 120px;
-  -o-background-size: 120px;
-  -webkit-background-size: 120px;
   background-size: 120px;
 }
 .v128 {
   background-color: rgba(30, 238, 251, 0.5);
   background-image: url("../images/elements/mobile telephone.png");
-  -moz-background-size: 120px;
-  -o-background-size: 120px;
-  -webkit-background-size: 120px;
-  background-size: 120px;
+  background-size: 132px;
 }
 .v256 {
   background-color: rgba(0, 255, 138, 0.5);
   background-image: url(../images/elements/shovel.png);
-  -moz-background-size: 120px;
-  -o-background-size: 120px;
-  -webkit-background-size: 120px;
   background-size: 120px;
 }
 .v512 {
   background-color: rgba(18, 255, 0, 0.5);
   background-image: url(../images/elements/toothpaste.png);
-  -moz-background-size: 120px;
-  -o-background-size: 120px;
-  -webkit-background-size: 120px;
   background-size: 120px;
 }
 .v1024 {
   background-color: rgba(190, 255, 0, 0.5);
   background-image: url(../images/elements/apple.png);
-  -moz-background-size: 120px;
-  -o-background-size: 120px;
-  -webkit-background-size: 120px;
   background-size: 120px;
 }
 .v2048 {
   background-color: rgba(255, 158, 4, 0.5);
   background-image: url(../images/elements/apple.png);
-  -moz-background-size: 120px;
-  -o-background-size: 120px;
-  -webkit-background-size: 120px;
   background-size: 120px;
 }
 .v4096 {
   background-color: rgba(237, 65, 33, 0.5);
   background-image: url(../images/elements/apple.png);
-  -moz-background-size: 120px;
-  -o-background-size: 120px;
-  -webkit-background-size: 120px;
   background-size: 120px;
 }
 .v8192 {
   background-color: rgba(255, 0, 0, 0.5);
   background-image: url(../images/elements/apple.png);
-  -moz-background-size: 120px;
-  -o-background-size: 120px;
-  -webkit-background-size: 120px;
   background-size: 120px;
 }
 * {
@@ -172,6 +133,8 @@ body div#container div#game div.value {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   transition: 0.1s ease-in-out all;
+  background-repeat: no-repeat;
+  background-position: 50%;
 }
 body div#container div#game div.value div.coord {
   font-size: 8px;

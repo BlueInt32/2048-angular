@@ -1,6 +1,6 @@
 ﻿var app = angular.module('app', ['textFilters', 'ngAnimate']);
 
-app.value('gameServiceConfig', {addMode : true, autoInit : true, showDebug : true});
+app.value('gameServiceConfig', {addMode : true, autoInit : true, showDebug : false});
 
 app.service('gameService', ['$timeout', 'gameServiceConfig', gameService]);
 
