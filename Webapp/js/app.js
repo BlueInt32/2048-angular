@@ -19,10 +19,13 @@ app.controller('mainCtrl', ['$document', '$scope', 'gameService', function mainC
 			default: break;
 		}
 
+		$scope.items = gameService._items;
+		$scope.score = gameService._score;
 		$scope.$digest();
 	};
-	$document.bind("keydown", $scope.keyboardHandler);
 	$scope.items = gameService._items;
+	$scope.score = gameService._score;
+	$document.bind("keydown", $scope.keyboardHandler);
 }]);
 
 angular.module('textFilters', []).filter('zeroEmpty', function ()

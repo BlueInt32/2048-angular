@@ -108,7 +108,6 @@
     <Content Include="Global.asax" />
     <Content Include="js\app.js" />
     <Content Include="js\app.spec.js" />
-    <Content Include="js\app2.js" />
     <Content Include="js\bower_components\angular\.bower.json" />
     <Content Include="js\bower_components\angular\angular-animate.js" />
     <Content Include="js\bower_components\angular\angular-csp.css" />
@@ -155,7 +154,6 @@
     <Content Include="js\bower_components\angular\angular.min.js.gzip" />
     <Content Include="js\bower_components\angular\angular.min.js.map" />
     <Content Include="js\bower_components\angular\README.md" />
-    <Content Include="Views\Home\Index2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
