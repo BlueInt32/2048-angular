@@ -127,6 +127,8 @@
     <None Include="Properties\PublishProfiles\Journeyman.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="js\directives.js" />
+    <Content Include="js\factories.js" />
+    <Content Include="js\karma.conf.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

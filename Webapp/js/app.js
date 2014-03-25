@@ -1,7 +1,16 @@
-﻿var app = angular.module('app', ['textFilters', 'ngAnimate', 'gameService']);
+﻿var app = angular.module('app', ['textFilters', 'ngAnimate']);
 
-app.controller('mainCtrl', function ($scope, $rootScope, $document, $timeout)
+app.provider('test', game);
+app.config(function(testProvider)
 {
+	testProvider.setMode("Anglais");
+});
+app.controller('mainCtrl', function ($scope, $rootScope, $document, $timeout, test)
+{
+	$scope.coucou = test.kiki;
+	/*
+	 * 
+	#region oldCode
 	//$scope.addMode = true;
 	//$scope.autoInit = true;
 	//$scope.items = new Array();
@@ -201,6 +210,7 @@ app.controller('mainCtrl', function ($scope, $rootScope, $document, $timeout)
 	//};
 
 	////#endregion
+	*/
 	if ($scope.autoInit)
 		init();
 });
