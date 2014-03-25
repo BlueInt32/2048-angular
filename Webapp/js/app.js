@@ -4,12 +4,12 @@ app.value('gameServiceConfig', {addMode : true, autoInit : true, showDebug : tru
 
 app.service('gameService', ['$timeout', 'gameServiceConfig', gameService]);
 
-app.controller('mainCtrl', ['$document', '$scope', 'gameService', function mainCtrl($document, $scope, gameService)
+app.controller('mainCtrl', ['$document', '$scope', 'gameService', 'gameServiceConfig', function mainCtrl($document, $scope, gameService, gameServiceConfig)
 {
-
+	
 	$scope.keyboardHandler = function (event)
 	{
-		console
+
 		switch (event.which)
 		{
 			case 37: gameService.globalMove("left", function () { $scope.$digest(); }); break;
@@ -19,12 +19,19 @@ app.controller('mainCtrl', ['$document', '$scope', 'gameService', function mainC
 			default: break;
 		}
 
-		$scope.items = gameService._items;
-		$scope.score = gameService._score;
+		$scope.updateScope();
 		$scope.$digest();
 	};
-	$scope.items = gameService._items;
-	$scope.score = gameService._score;
+	$scope.updateScope = function()
+	{
+		$scope.items = gameService._items;
+		$scope.score = gameService._score;
+		$scope.availableSquares = gameService._availableSquares;
+		$scope.showDebug = gameServiceConfig.showDebug;
+	};
+
+	$scope.updateScope();
+
 	$document.bind("keydown", $scope.keyboardHandler);
 }]);
 

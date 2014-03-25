@@ -9,11 +9,13 @@
 	this._score = 0;
 	this._availableSquares = new Array();
 
+	this._lock = false;
+
 	this.timeout = $timeout;
 
 
 	//#region init
-	this.init = function ()
+	this.init = function (initValues)
 	{
 		for (var i = 0; i < 4; i++)
 		{
@@ -22,7 +24,7 @@
 				self.setSquareState(i, j, true);
 			}
 		}
-		self.addItems([{ x: 3, y: 0, v: 2 }, { x: 3, y: 1, v: 2 }, { x: 3, y: 2, v: 2 }]);
+		self.addItems(initValues);
 		
 	};
 
@@ -32,10 +34,9 @@
 	this.setSquareState = function (x, y, isAvailable)
 	{
 		var key = x + 4 * y;
-		var nbItemsInSquare = typeof self._availableSquares[key] == 'undefined' ? 0 : self._availableSquares[key].nbItemsInSquare;
-
-		nbItemsInSquare = isAvailable ? 0 : nbItemsInSquare + 1;
-		self._availableSquares[key] = { x: x, y: y, nbItemsInSquare: nbItemsInSquare };
+		var isSquareOccupied = typeof self._availableSquares[key] == 'undefined' ? false : self._availableSquares[key].isSquareOccupied;
+		isSquareOccupied = !isAvailable;
+		self._availableSquares[key] = { x: x, y: y, isSquareOccupied: isSquareOccupied };
 	};
 	//#endregion
 
@@ -45,7 +46,7 @@
 		var picker = new Array();
 		for (var i = 0; i < self._availableSquares.length; i++)
 		{
-			if (self._availableSquares[i].nbItemsInSquare == 0) { picker.push(i); }
+			if (self._availableSquares[i].isSquareOccupied == 0) { picker.push(i); }
 		}
 		var pick = Math.floor(Math.random() * picker.length);
 		return self._availableSquares[picker[pick]];
@@ -70,6 +71,8 @@
 	//#region globalMove 
 	this.globalMove = function (direction, callBackFn)
 	{
+		if (self._lock)
+			return;
 		var someMoveOccured = true;
 
 		var moves = 0;
@@ -107,11 +110,13 @@
 		{
 			// add a value somewhere
 			var availableSquare = self.pickAFreeSquare();
+			self._lock = true;
 			self.timeout(function ()
 			{
 				self.addItems([{ x: availableSquare.x, y: availableSquare.y, v: 2 }]);
 				if ('undefined' == typeof callBackFn){callBackFn = function () { }}
 				callBackFn.call(null);
+				self._lock = false;
 			}, 200);
 		}
 	};
@@ -199,7 +204,7 @@
 
 	if (this._autoInit)
 	{
-		this.init();
+		this.init([{ x: 3, y: 0, v: 2 }, { x: 3, y: 1, v: 2 }]);
 	}
 
 }
