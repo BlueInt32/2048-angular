@@ -1,4 +1,4 @@
-.x0 {
+﻿.x0 {
   left: 0;
 }
 .x1 {
@@ -40,7 +40,7 @@
 }
 .v8 {
   background-color: rgba(150, 171, 232, 0.5);
-  background-image: url(../images/elements/clock.png);
+  background-image: url(../images/elements/xxxx.png);
   -moz-background-size: 120px;
   -o-background-size: 120px;
   -webkit-background-size: 120px;
@@ -209,3 +209,4 @@ body div#container div#game div.value.ng-move.ng-move-active {
 body div#container input.smallInput {
   width: 50px;
 }
+/*# sourceMappingURL=styles.css.map */

@@ -12,12 +12,11 @@
 	<body ng-app="app" ng-controller="mainCtrl as control">
 		<div id="container">
 			<h1>Angular 2048</h1>
-			<h2>{{coucou}}</h2>
-			<h3>Score : {{score}} </h3>
+			<h3>Score : {{score}} {{items.length}}</h3>
 			<div id="game">
-				<square bounditem="item" ng-repeat="item in items" >
+				<square bounditem="item" ng-repeat="item in items" showvalue="{{showvalue}}">
 					@*<div class=" coord">[{{item.x}}-{{item.y}}]</div>*@
-					<div class="val" ng-if="showvalue">{{item.v}}</div>
+
 				</square>
 
 				<div class="debug" ng-if="showDebug">
@@ -48,7 +47,7 @@
 
 		<script src="~/js/bower_components/angular/angular.js"></script>
 		<script src="~/js/bower_components/angular/angular-animate.js"></script>
-		<script src="~/js/factories.js"></script>
+		<script src="~/js/gameService.js"></script>
 		<script src="~/js/app.js"></script>
 		<script src="~/js/directives.js"></script>
 	</body>
