@@ -97,22 +97,20 @@
     <Content Include="Content\images\elements\clock.png" />
     <Content Include="Content\images\elements\cup.png" />
     <Content Include="Content\images\elements\knickers.png" />
-    <Content Include="Content\images\elements\mobile telephone.png" />
+    <Content Include="Content\images\elements\mobiletelephone.png" />
     <Content Include="Content\images\elements\rokey.png" />
     <Content Include="Content\images\elements\shovel.png" />
-    <Content Include="Content\images\elements\toilet paper.png" />
+    <Content Include="Content\images\elements\toiletpaper.png" />
     <Content Include="Content\images\elements\toothpaste.png" />
     <Content Include="Content\images\elements\vest.png" />
-    <Content Include="Content\images\elements\www.rokey.net.png" />
     <Content Include="Content\images\elements\xxxx.png" />
     <Content Include="Global.asax" />
     <Content Include="js\app.js" />
-    <Content Include="js\app.spec.js" />
+    <None Include="js\test\e2e\runner.html" />
+    <Content Include="js\test\unit\app.spec.js" />
     <Content Include="js\bower_components\angular\.bower.json" />
     <Content Include="js\bower_components\angular\angular-animate.js" />
-    <Content Include="js\bower_components\angular\angular-csp.css" />
     <Content Include="js\bower_components\angular\angular.js" />
-    <Content Include="js\bower_components\angular\angular.min.js" />
     <Content Include="js\bower_components\angular\bower.json" />
     <Content Include="Content\css\styles.less" />
     <Content Include="Content\css\styles.css.map">
@@ -127,6 +125,8 @@
     <None Include="Properties\PublishProfiles\Journeyman.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="js\directives.js" />
+    <Content Include="js\gruntfile.js" />
+    <Content Include="js\min.js" />
     <Content Include="js\package.json" />
     <Content Include="js\services\gameService.js" />
     <Content Include="js\karma.conf.js" />
@@ -152,7 +152,6 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="js\bower_components\angular\angular.min.js.gzip" />
     <Content Include="js\bower_components\angular\angular.min.js.map" />
     <Content Include="js\bower_components\angular\README.md" />
     <None Include="Web.Debug.config">

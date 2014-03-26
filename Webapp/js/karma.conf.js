@@ -18,13 +18,15 @@ module.exports = function(config) {
       'bower_components/angular/angular-mocks.js',
 	  'bower_components/angular/angular-animate.js',
 	  'services/*.js',
-      '*.js'
+      '*.js',
+	  'test/unit/*.spec.js'
     ],
 
 
     // list of files to exclude
     exclude: [
-      
+      'gruntfile.js',
+	  'min.js'
     ],
 
 

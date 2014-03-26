@@ -6,7 +6,6 @@ app.service('gameService', ['$timeout', 'gameServiceConfig', gameService]);
 
 app.controller('mainCtrl', ['$document', '$scope', 'gameService', 'gameServiceConfig', function mainCtrl($document, $scope, gameService, gameServiceConfig)
 {
-	
 	$scope.keyboardHandler = function (event)
 	{
 
@@ -16,7 +15,7 @@ app.controller('mainCtrl', ['$document', '$scope', 'gameService', 'gameServiceCo
 			case 38: gameService.globalMove("up", function () { $scope.$digest(); }); break;
 			case 39: gameService.globalMove("right", function () { $scope.$digest(); }); break;
 			case 40: gameService.globalMove("down", function () { $scope.$digest(); }); break;
-			default: break;
+			default: break; 
 		}
 
 		$scope.updateScope();
@@ -36,7 +35,7 @@ app.controller('mainCtrl', ['$document', '$scope', 'gameService', 'gameServiceCo
 
 		$scope.updateScope();
 		$scope.$digest();
-	}
+	};
 
 	$scope.updateScope();
 

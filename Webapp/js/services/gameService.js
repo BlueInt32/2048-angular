@@ -5,9 +5,9 @@
 	this._autoInit = gameServiceConfig.autoInit;
 	this._showDebug = gameServiceConfig.showDebug;
 
-	this._items = new Array();
+	this._items = [];
 	this._score = 0;
-	this._availableSquares = new Array();
+	this._availableSquares = [];
 
 	this._lock = false;
 
@@ -43,10 +43,10 @@
 	//#region pickAFreeSquare 
 	this.pickAFreeSquare = function ()
 	{
-		var picker = new Array();
+		var picker = [];
 		for (var i = 0; i < self._availableSquares.length; i++)
 		{
-			if (self._availableSquares[i].isSquareOccupied == 0) { picker.push(i); }
+			if (!self._availableSquares[i].isSquareOccupied) { picker.push(i); }
 		}
 		var pick = Math.floor(Math.random() * picker.length);
 		return self._availableSquares[picker[pick]];
@@ -79,10 +79,10 @@
 		while (someMoveOccured)
 		{
 			someMoveOccured = false;
-			var itemsLength = self._items.length;
+			var itemsLength = self._items.length, item;
 			for (var i = 0; i < itemsLength; i++)
 			{
-				var item = self._items[i];
+				item = self._items[i];
 				if (self.canMove(item, direction))
 				{
 					self.oneMove(item, direction);
@@ -90,21 +90,21 @@
 				}
 			}
 
-			for (var i = 0; i < self._items.length; i++)
+			for (var j = 0; j < self._items.length; j++)
 			{
-				var item = self._items[i];
+				item = self._items[j];
 
 				if (item.destroy)
 				{
-					self._items.splice(i, 1);
+					self._items.splice(j, 1);
 				}
 			}
 
 			moves++;
 		}
-		for (var i = 0; i < self._items.length; i++)
+		for (var k = 0; k < self._items.length; k++)
 		{
-			self._items[i].justFusionned = false;
+			self._items[k].justFusionned = false;
 		}
 		if (moves > 1 && self._addMode)
 		{
@@ -114,7 +114,7 @@
 			self.timeout(function ()
 			{
 				self.addItems([{ x: availableSquare.x, y: availableSquare.y, v: 2 }]);
-				if ('undefined' == typeof callBackFn){callBackFn = function () { }}
+				if ('undefined' == typeof callBackFn) { callBackFn = function () { };}
 				callBackFn.call(null);
 				self._lock = false;
 			}, 200);
@@ -153,9 +153,9 @@
 		// test if item is on the edge
 		switch (direction)
 		{
-			case "left": if (item.x == 0) return false; break;
+			case "left": if (item.x === 0) return false; break;
 			case "right": if (item.x == 3) return false; break;
-			case "up": if (item.y == 0) return false; break;
+			case "up": if (item.y === 0) return false; break;
 			case "down": if (item.y == 3) return false; break;
 		}
 
