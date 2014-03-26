@@ -13,6 +13,7 @@
 	<div id="container">
 		<h1>Angular 2048</h1>
 		<h3>Score : {{score}}</h3>
+		<h1 ng-if="isGameOver">Game Over !!</h1>
 		<div id="game">
 			<square bounditem="item" ng-repeat="item in items" showvalue="{{showvalue}}">
 				@*<div class=" coord">[{{item.x}}-{{item.y}}]</div>*@
@@ -31,7 +32,7 @@
 				| <input type="checkbox" ng-model="showvalue" /> Montrer les valeurs
 			</div>
 		</div>
-
+		
 	</div>@if (ViewBag.isDebug)
 		{
 		<script src="~/js/bower_components/angular/angular.js"></script>

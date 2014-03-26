@@ -89,6 +89,9 @@
     <Content Include="Content\css\values.css">
       <DependentUpon>values.less</DependentUpon>
     </Content>
+    <Content Include="Content\css\values.min.css">
+      <DependentUpon>values.css</DependentUpon>
+    </Content>
     <Content Include="Content\images\elements\apple.png" />
     <Content Include="Content\images\elements\barrel.png" />
     <Content Include="Content\images\elements\book.png" />

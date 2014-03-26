@@ -1,23 +1,27 @@
 ﻿var app = angular.module('app', ['textFilters', 'ngAnimate']);
 
-app.value('gameServiceConfig', {addMode : true, autoInit : true, showDebug : false});
+app.value('gameServiceConfig', {addMode : true, autoInit : true, showDebug : true});
 
 app.service('gameService', ['$timeout', 'gameServiceConfig', gameService]);
 
 app.controller('mainCtrl', ['$document', '$scope', 'gameService', 'gameServiceConfig', function mainCtrl($document, $scope, gameService, gameServiceConfig)
 {
+	$scope.MoveDoneCallback = function(isGameOver)
+	{
+		$scope.isGameOver = isGameOver;
+		$scope.$digest();
+	};
+
 	$scope.keyboardHandler = function (event)
 	{
-
 		switch (event.which)
 		{
-			case 37: gameService.globalMove("left", function () { $scope.$digest(); }); break;
-			case 38: gameService.globalMove("up", function () { $scope.$digest(); }); break;
-			case 39: gameService.globalMove("right", function () { $scope.$digest(); }); break;
-			case 40: gameService.globalMove("down", function () { $scope.$digest(); }); break;
+			case 37: console.log(37); gameService.globalMove("left", $scope.MoveDoneCallback); break;
+			case 38: console.log(38); gameService.globalMove("up", $scope.MoveDoneCallback); break;
+			case 39: console.log(39); gameService.globalMove("right", $scope.MoveDoneCallback); break;
+			case 40: console.log(40); gameService.globalMove("down", $scope.MoveDoneCallback); break;
 			default: break; 
 		}
-
 		$scope.updateScope();
 		$scope.$digest();
 	};

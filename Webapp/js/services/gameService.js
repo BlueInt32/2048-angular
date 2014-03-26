@@ -13,6 +13,8 @@
 
 	this.timeout = $timeout;
 
+	this._gameOver = false;
+
 
 	//#region init
 	this.init = function (initValues)
@@ -34,9 +36,7 @@
 	this.setSquareState = function (x, y, isAvailable)
 	{
 		var key = x + 4 * y;
-		var isSquareOccupied = typeof self._availableSquares[key] == 'undefined' ? false : self._availableSquares[key].isSquareOccupied;
-		isSquareOccupied = !isAvailable;
-		self._availableSquares[key] = { x: x, y: y, isSquareOccupied: isSquareOccupied };
+		self._availableSquares[key] = { x: x, y: y, isSquareOccupied: !isAvailable };
 	};
 	//#endregion
 
@@ -83,7 +83,7 @@
 			for (var i = 0; i < itemsLength; i++)
 			{
 				item = self._items[i];
-				if (self.canMove(item, direction))
+				if (self.canMove(item, direction, true))
 				{
 					self.oneMove(item, direction);
 					someMoveOccured = true;
@@ -94,7 +94,7 @@
 			{
 				item = self._items[j];
 
-				if (item.destroy)
+				if (item.destroy && someMoveOccured)
 				{
 					self._items.splice(j, 1);
 				}
@@ -111,15 +111,22 @@
 			// add a value somewhere
 			var availableSquare = self.pickAFreeSquare();
 			self._lock = true;
+			
 			self.timeout(function ()
 			{
 				self.addItems([{ x: availableSquare.x, y: availableSquare.y, v: 2 }]);
+				if (self._items.length == 16 && self.testGameOver())
+				{
+					self._gameOver = true; // gameOver = false
+				}
 				if ('undefined' == typeof callBackFn) { callBackFn = function () { };}
-				callBackFn.call(null);
+				callBackFn.call(null, self._gameOver);
 				self._lock = false;
+				
+
 			}, 200);
 		}
-
+		return  false; // gameOver = false
 	};
 	//#endregion
 
@@ -148,12 +155,13 @@
 	//#endregion
 
 	//#region canMove 
-	this.canMove = function (item, direction)
+	this.canMove = function (item, direction, canChangeState)
 	{
 		// test if item is on the edge
+
 		switch (direction)
 		{
-			case "left": if (item.x === 0) return false; break;
+			case "left": if (item.x === 0) return false;break;
 			case "right": if (item.x == 3) return false; break;
 			case "up": if (item.y === 0) return false; break;
 			case "down": if (item.y == 3) return false; break;
@@ -163,14 +171,14 @@
 		var adjacentItem = self.getAdjacentItem(item, direction);
 		if (typeof adjacentItem == 'undefined')
 			return true; // ... we can move this way.
-
+		console.log(adjacentItem);
 		if (adjacentItem.v != item.v || adjacentItem.justFusionned || item.justFusionned || item.destroy)
 		{
 			return false;
 		} else
 		{
-			item.fusion = true;
-			adjacentItem.destroy = true;
+			item.fusion = canChangeState;// when the game is tested for gameOver, values should not change !
+			adjacentItem.destroy = canChangeState;
 		}
 		return true;
 	};
@@ -195,17 +203,52 @@
 					break;
 				case "down": if (testItem.y == item.y + 1 && testItem.x == item.x) return testItem;
 					break;
-				default:
-					return null;
 			}
 		}
 	};
 	//#endregion
 
+	this.testGameOver = function()
+	{
+		var canMoveOr = false;
+		for (var i = 0; i < self._items.length; i++)
+		{
+			canMoveOr = canMoveOr | self.canMove(self._items[i], "up", false);
+			canMoveOr = canMoveOr | self.canMove(self._items[i], "down", false);
+			canMoveOr = canMoveOr | self.canMove(self._items[i], "left", false);
+			canMoveOr = canMoveOr | self.canMove(self._items[i], "right", false);
+		}
+		return !canMoveOr;
+	};
+
+
 
 	if (this._autoInit)
 	{
-		this.init([{ x: 3, y: 0, v: 2 }, { x: 3, y: 1, v: 2 }]);
+		this.init(
+			//[{ x: 3, y: 0, v: 2 }, { x: 3, y: 1, v: 2 }]
+			//[{ x: 3, y: 3, v: 2 }, { x: 3, y: 2, v: 2 }, { x: 1, y: 1, v: 2 }, { x: 2, y: 1, v: 2 }]
+			[
+				{ x: 0, y: 0, v: 8 },
+				{ x: 1, y: 0, v: 32 },
+				{ x: 2, y: 0, v: 4 },
+				{ x: 3, y: 0, v: 2 },
+
+				{ x: 0, y: 1, v: 2 },
+				{ x: 1, y: 1, v: 4 },
+				{ x: 2, y: 1, v: 8 },
+				{ x: 3, y: 1, v: 2 },
+
+				{ x: 1, y: 2, v: 4 },
+				{ x: 2, y: 2, v: 16 },
+				{ x: 3, y: 2, v: 4 },
+
+				{ x: 0, y: 3, v: 2 },
+				{ x: 1, y: 3, v: 4 },
+				{ x: 2, y: 3, v: 8 },
+				{ x: 3, y: 3, v: 2 }
+			]
+			);
 	}
 
 }

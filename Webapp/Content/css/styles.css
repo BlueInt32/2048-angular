@@ -1,4 +1,4 @@
-﻿.x0 {
+.x0 {
   left: 0;
 }
 .x1 {
@@ -49,12 +49,12 @@
 }
 .v64 {
   background-color: rgba(21, 177, 235, 0.5);
-  background-image: url("../images/elements/toilet paper.png");
+  background-image: url("../images/elements/toiletpaper.png");
   background-size: 120px;
 }
 .v128 {
   background-color: rgba(30, 238, 251, 0.5);
-  background-image: url("../images/elements/mobile telephone.png");
+  background-image: url("../images/elements/mobiletelephone.png");
   background-size: 132px;
 }
 .v256 {
@@ -172,4 +172,3 @@ body div#container div#game div.value.ng-move.ng-move-active {
 body div#container input.smallInput {
   width: 50px;
 }
-/*# sourceMappingURL=styles.css.map */

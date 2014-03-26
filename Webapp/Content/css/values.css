@@ -1,4 +1,4 @@
-﻿.v2 {
+.v2 {
   background-color: rgba(181, 183, 190, 0.5);
   background-image: url(../images/elements/apple.png);
   background-size: 60px;
@@ -25,12 +25,12 @@
 }
 .v64 {
   background-color: rgba(21, 177, 235, 0.5);
-  background-image: url("../images/elements/toilet paper.png");
+  background-image: url("../images/elements/toiletpaper.png");
   background-size: 120px;
 }
 .v128 {
   background-color: rgba(30, 238, 251, 0.5);
-  background-image: url("../images/elements/mobile telephone.png");
+  background-image: url("../images/elements/mobiletelephone.png");
   background-size: 132px;
 }
 .v256 {
@@ -63,4 +63,3 @@
   background-image: url(../images/elements/apple.png);
   background-size: 120px;
 }
-/*# sourceMappingURL=values.css.map */

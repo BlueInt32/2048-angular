@@ -14,19 +14,6 @@
 
 	});
 
-	//beforeEach(module('app', function ($provide)
-	//{
-	//	$provide.value('gameServiceConfig', { addMode: false, autoInit: false, showDebug: false });
-	//}));
-
-
-	//		it('should init correctly', inject(function ($controller)
-	//{
-	//			var scope = {}, ctrl = $controller('mainCtrl', { $scope: scope });
-	//			expect(scope.items.length).toBe(0);
-	//			expect(scope.score).toBe(0);
-	//		}));
-
 
 	it('should have an init function', function ()
 	{
@@ -55,6 +42,59 @@
 
 	});
 	
+	it('should give correct adjacent items', function ()
+	{
+
+		gameService.init([{ x: 3, y: 3, v: 3 }, { x: 3, y: 2, v: 3 },{ x: 1, y: 1, v: 3 }, { x: 2, y: 1, v: 3 }] );
+
+		var item = gameService.getAdjacentItem(gameService._items[0], "up");
+		expect(item).toBe(gameService._items[1]);
+
+		item = gameService.getAdjacentItem(gameService._items[1], "down");
+		expect(item).toBe(gameService._items[0]);
+
+		item = gameService.getAdjacentItem(gameService._items[2], "right");
+		expect(item).toBe(gameService._items[3]);
+
+		item = gameService.getAdjacentItem(gameService._items[3], "left");
+		expect(item).toBe(gameService._items[2]);
+
+		// but also when getAdjacentItem should return undefined : 
+		item = gameService.getAdjacentItem(gameService._items[0], "down");
+		expect(item).not.toBeDefined();
+		item = gameService.getAdjacentItem(gameService._items[0], "right");
+		expect(item).not.toBeDefined();
+
+	});
+
+	it('should give canMove results with fusion up', function ()
+	{
+		gameService.init([{ x: 3, y: 3, v: 3 }, { x: 3, y: 2, v: 3 },{ x: 3, y: 0, v: 3 },{ x: 1, y: 1, v: 3 }, { x: 2, y: 1, v: 3 }] );
+
+		// when fusion
+		var item0CanMoveUp = gameService.canMove(gameService._items[0], "up");
+		expect(item0CanMoveUp).toBe(true);
+		expect(gameService._items[0].fusion).toBe(true);
+		expect(gameService._items[0].destroy).toBe(false);
+		expect(gameService._items[1].fusion).toBe(false);
+		expect(gameService._items[1].destroy).toBe(true);
+
+	});
+
+	it('should give canMove results when items cannot move', function ()
+	{
+		gameService.init([{ x: 3, y: 3, v: 3 }, { x: 3, y: 2, v: 3 }, { x: 3, y: 0, v: 3 }, { x: 1, y: 1, v: 3 }, { x: 2, y: 1, v: 3 }]);
+
+		// when cannot move
+		var item2CanMoveRight = gameService.canMove(gameService._items[1], "right");
+		expect(item2CanMoveRight).toBe(false);
+		expect(gameService._items[2].fusion).toBe(false);
+		expect(gameService._items[2].destroy).toBe(false);
+		var item0CanMoveDown = gameService.canMove(gameService._items[0], "down");
+		expect(item0CanMoveDown).toBe(false);
+
+	});
+
 	it('should have right available squares data', function ()
 	{
 
@@ -94,6 +134,23 @@
 		gameService.globalMove("right", null);
 		expect([gameService._items[0].x, gameService._items[0].y]).toEqual([3, 3]);
 		//expect().toBe(3);
+	});
+
+
+	it('should show game over correctly', function ()
+	{
+		var initFullArray = [];
+
+		gameService.init([]);
+		for (var i = 0; i < 4; i++)
+		{
+			for (var j = 0; j < 4; j++)
+			{
+				initFullArray.push({ x: i, y: j, v: i + j + 1 });
+			}
+		}
+		gameService.addItems(initFullArray);
+		expect(gameService.testGameOver()).toBe(true);
 	});
 
 });
