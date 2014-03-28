@@ -5,7 +5,7 @@
 	// Project configuration.
 	grunt.initConfig({
 		jshint: {
-			all: ['app.js', 'directives.js', 'services/gameService.js', '!min.js']
+			all: ['app/app.js', 'app/directives.js', 'app/gameService.js', '!min.js']
 		},
 		uglify: {
 			dist: {
@@ -13,10 +13,10 @@
 					'min.js'
 						: [
 							'bower_components/angular/angular.js',
-							'bower_components/angular/angular-animate.js',
-							'services/gameService.js',
-							'app.js',
-							'directives.js'
+							'bower_components/angular-animate/angular-animate.js',
+							'app/gameService.js',
+							'app/app.js',
+							'app/directives.js'
 							]
 				}
 			}
@@ -60,5 +60,5 @@
 	});
 
 
-	grunt.registerTask('default', ['jshint', 'karma', 'uglify:dist', 'cssmin', 'imagemin']);
+	grunt.registerTask('default', ['jshint', 'uglify', 'cssmin']);
 };

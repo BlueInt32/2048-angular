@@ -1,6 +1,6 @@
 ﻿var app = angular.module('app', ['textFilters', 'ngAnimate']);
 
-app.value('gameServiceConfig', {addMode : true, autoInit : true, showDebug : true});
+app.value('gameServiceConfig', {addMode : true, autoInit : true, showDebug : false});
 
 app.service('gameService', ['$timeout', 'gameServiceConfig', gameService]);
 
@@ -41,11 +41,11 @@ app.controller('mainCtrl', ['$document', '$scope', 'gameService', 'gameServiceCo
 		$scope.$digest();
 	};
 
-	$scope.reInit = function()
+	$scope.reInit = function ()
 	{
-		gameService.emptyGame();	
+		gameService.emptyGame();
 		gameService.initFirstItems([]);
-	}
+	};
 
 	$scope.updateScope();
 

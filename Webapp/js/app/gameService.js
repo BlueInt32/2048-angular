@@ -15,12 +15,12 @@
 		self._items = [];
 		self._score = 0;
 		self._availableSquares = [];
-		
+
 		self._lock = false;
-		
-		
+
+
 		self._gameOver = false;
-	}
+	};
 
 	//#region initFirstItems
 	this.initFirstItems = function (initValues)
@@ -263,16 +263,14 @@
 	if (this._autoInit)
 	{
 		this.emptyGame();
-		this.initFirstItems(
-			[]
-			//[{ x: 3, y: 0, v: 2 }, { x: 3, y: 1, v: 2 }]
-			//[{ x: 3, y: 3, v: 2 }, { x: 3, y: 2, v: 2 }, { x: 1, y: 1, v: 2 }, { x: 2, y: 1, v: 2 }]
-			//[{ x: 3, y: 1, v: 2 }, { x: 3, y: 0, v: 2 }, { x: 3, y: 2, v: 2 }, { x: 3, y: 3, v: 2 }]
-			);
+		this.initFirstItems([]);
 		this.createItemInAFreeSquare();
 		this.createItemInAFreeSquare();
 
 	}
-	this.emptyGame();
+	else
+	{
+		this.emptyGame();
+	}
 
 }
