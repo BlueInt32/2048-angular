@@ -1,4 +1,4 @@
-.x0 {
+﻿.x0 {
   left: 0;
 }
 .x1 {
@@ -172,3 +172,42 @@ body div#container div#game div.value.ng-move.ng-move-active {
 body div#container input.smallInput {
   width: 50px;
 }
+body div#container .gameOverPopin {
+  position: fixed;
+  z-index: 100000;
+  top: 100px;
+  width: 600px;
+  height: 150px;
+  padding: 30px;
+  text-align: center;
+  left: 50%;
+  margin-left: -300px;
+  /* Width / 2 */
+  background-color: #fff;
+  font-size: 1.2em;
+  overflow: hidden;
+  padding-bottom: 10px;
+  border: 1px solid #555;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-box-shadow: 1px 1px 8px 1px 767676 inset;
+  -moz-box-shadow: 1px 1px 8px 1px 767676 inset;
+  box-shadow: 1px 1px 8px 1px 767676 inset;
+  font-size: 14px;
+}
+body div#container .gameOverPopin p {
+  margin: 25px;
+}
+body div#container .gameOverPopin p a {
+  color: #035675;
+  text-decoration: none;
+}
+body div#container .gameOverPopin p a:hover {
+  color: #26a0ce;
+}
+body div#container .gameOverPopin a.closePopin {
+  float: right;
+  margin: 4px 10px;
+}
+/*# sourceMappingURL=styles.css.map */

@@ -41,6 +41,12 @@ app.controller('mainCtrl', ['$document', '$scope', 'gameService', 'gameServiceCo
 		$scope.$digest();
 	};
 
+	$scope.reInit = function()
+	{
+		gameService.emptyGame();	
+		gameService.initFirstItems([]);
+	}
+
 	$scope.updateScope();
 
 	$document.bind("keydown", $scope.keyboardHandler);

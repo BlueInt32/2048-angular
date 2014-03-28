@@ -4,21 +4,28 @@
 	this._addMode = gameServiceConfig.addMode;
 	this._autoInit = gameServiceConfig.autoInit;
 	this._showDebug = gameServiceConfig.showDebug;
-
-	this._items = [];
-	this._score = 0;
-	this._availableSquares = [];
-
-	this._lock = false;
-
 	this.timeout = $timeout;
 
-	this._gameOver = false;
+	this._valuePick = [2, 2, 4];
 
 
-	//#region init
-	this.init = function (initValues)
+	this.emptyGame = function ()
 	{
+
+		self._items = [];
+		self._score = 0;
+		self._availableSquares = [];
+		
+		self._lock = false;
+		
+		
+		self._gameOver = false;
+	}
+
+	//#region initFirstItems
+	this.initFirstItems = function (initValues)
+	{
+		self.emptyGame();
 		for (var i = 0; i < 4; i++)
 		{
 			for (var j = 0; j < 4; j++)
@@ -41,7 +48,7 @@
 	//#endregion
 
 	//#region pickAFreeSquare 
-	this.pickAFreeSquare = function ()
+	this.createItemInAFreeSquare = function ()
 	{
 		var picker = [];
 		for (var i = 0; i < self._availableSquares.length; i++)
@@ -49,7 +56,12 @@
 			if (!self._availableSquares[i].isSquareOccupied) { picker.push(i); }
 		}
 		var pick = Math.floor(Math.random() * picker.length);
-		return self._availableSquares[picker[pick]];
+
+		var squarePicked = self._availableSquares[picker[pick]];
+
+		var valuePicked = self._valuePick[Math.floor(Math.random() * self._valuePick.length)];
+
+		self.addItems([{ x: squarePicked.x, y: squarePicked.y, v: valuePicked }]);
 	};
 	//#endregion
 
@@ -109,12 +121,13 @@
 		if (moves > 1 && self._addMode)
 		{
 			// add a value somewhere
-			var availableSquare = self.pickAFreeSquare();
+			//var availableSquare = self.pickAFreeSquare();
 			self._lock = true;
 			
 			self.timeout(function ()
 			{
-				self.addItems([{ x: availableSquare.x, y: availableSquare.y, v: 2 }]);
+				self.createItemInAFreeSquare();
+				//self.addItems([{ x: availableSquare.x, y: availableSquare.y, v: 2 }]);
 				if (self._items.length == 16 && self.testGameOver())
 				{
 					self._gameOver = true; // gameOver = false
@@ -168,25 +181,42 @@
 		}
 
 		// then test is some other element is there
-		var adjacentItem = self.getAdjacentItem(item, direction);
-		if (typeof adjacentItem == 'undefined')
+		var adjacentItem = self.getAdjacentItems(item, direction);
+
+		//var canGoInRightDirection = adjacentItem[0].v === item.v && !adjacentItem[0].justFusionned && !item.justFusionned && !item.destroy;
+		//var canBeDestroyed = adjacentItem[1].v === item.v && !adjacentItem[1].justFusionned && !item.justFusionned && !item.destroy;
+		if (typeof adjacentItem[0] == 'undefined')
 			return true; // ... we can move this way.
 		//console.log(adjacentItem);
-		if (adjacentItem.v != item.v || adjacentItem.justFusionned || item.justFusionned || item.destroy)
+		if (adjacentItem[0].v != item.v || adjacentItem[0].justFusionned || item.justFusionned || item.destroy)
 		{
 			return false;
 		} else
 		{
-			item.fusion = canChangeState;// when the game is tested for gameOver, values should not change !
-			adjacentItem.destroy = canChangeState;
+			// last test before setting fusion : is there an item in the opposite direction ?
+			if (typeof adjacentItem[1] != 'undefined' && adjacentItem[1].v === item.v && !adjacentItem[0].justFusionned)
+			{
+				return false;
+			}
+			else
+			{
+				item.fusion = canChangeState;// when the game is tested for gameOver, values should not change !
+				adjacentItem[0].destroy = canChangeState;
+			}
 		}
 		return true;
 	};
 	//#endregion
 
 	//#region getAdjacentItem 
-	this.getAdjacentItem = function (item, direction)
+
+	/// returns an array with 0, 1 or 2 items. 
+	/// First item is the potential adjacent item in the given direction. 
+	/// Second item is the potential adjacent item in the opposite direction.
+	this.getAdjacentItems = function (item, direction)
 	{
+		var adjacentItemInTheRightDirection;
+		var adjacentItemInTheOppositeDirection;
 		var itemsLength = self._items.length;
 		for (var i = 0; i < itemsLength; i++)
 		{
@@ -195,16 +225,25 @@
 				continue;
 			switch (direction)
 			{
-				case "left": if (testItem.x == item.x - 1 && testItem.y == item.y) return testItem;
+				case "left":
+					if (testItem.x == item.x - 1 && testItem.y == item.y) adjacentItemInTheRightDirection = testItem;
+					if (testItem.x == item.x + 1 && testItem.y == item.y) adjacentItemInTheOppositeDirection = testItem;
 					break;
-				case "right": if (testItem.x == item.x + 1 && testItem.y == item.y) return testItem;
+				case "right":
+					if (testItem.x == item.x + 1 && testItem.y == item.y) adjacentItemInTheRightDirection = testItem;
+					if (testItem.x == item.x - 1 && testItem.y == item.y) adjacentItemInTheOppositeDirection = testItem;
 					break;
-				case "up": if (testItem.y == item.y - 1 && testItem.x == item.x) return testItem;
+				case "up":
+					if (testItem.y == item.y - 1 && testItem.x == item.x) adjacentItemInTheRightDirection = testItem;
+					if (testItem.y == item.y + 1 && testItem.x == item.x) adjacentItemInTheOppositeDirection = testItem;
 					break;
-				case "down": if (testItem.y == item.y + 1 && testItem.x == item.x) return testItem;
+				case "down":
+					if (testItem.y == item.y + 1 && testItem.x == item.x) adjacentItemInTheRightDirection = testItem;
+					if (testItem.y == item.y - 1 && testItem.x == item.x) adjacentItemInTheOppositeDirection = testItem;
 					break;
 			}
 		}
+		return [adjacentItemInTheRightDirection, adjacentItemInTheOppositeDirection];
 	};
 	//#endregion
 
@@ -221,34 +260,19 @@
 		return !canMoveOr;
 	};
 
-
-
 	if (this._autoInit)
 	{
-		this.init(
+		this.emptyGame();
+		this.initFirstItems(
+			[]
 			//[{ x: 3, y: 0, v: 2 }, { x: 3, y: 1, v: 2 }]
 			//[{ x: 3, y: 3, v: 2 }, { x: 3, y: 2, v: 2 }, { x: 1, y: 1, v: 2 }, { x: 2, y: 1, v: 2 }]
-			[
-				{ x: 0, y: 0, v: 8 },
-				{ x: 1, y: 0, v: 32 },
-				{ x: 2, y: 0, v: 4 },
-				{ x: 3, y: 0, v: 2 },
-
-				{ x: 0, y: 1, v: 2 },
-				{ x: 1, y: 1, v: 4 },
-				{ x: 2, y: 1, v: 8 },
-				{ x: 3, y: 1, v: 2 },
-
-				{ x: 1, y: 2, v: 4 },
-				{ x: 2, y: 2, v: 16 },
-				{ x: 3, y: 2, v: 4 },
-
-				{ x: 0, y: 3, v: 2 },
-				{ x: 1, y: 3, v: 4 },
-				{ x: 2, y: 3, v: 8 },
-				{ x: 3, y: 3, v: 2 }
-			]
+			//[{ x: 3, y: 1, v: 2 }, { x: 3, y: 0, v: 2 }, { x: 3, y: 2, v: 2 }, { x: 3, y: 3, v: 2 }]
 			);
+		this.createItemInAFreeSquare();
+		this.createItemInAFreeSquare();
+
 	}
+	this.emptyGame();
 
 }
