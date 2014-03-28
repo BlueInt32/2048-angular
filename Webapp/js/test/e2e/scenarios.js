@@ -14,9 +14,6 @@ describe('2048 App', function() {
       expect(repeater('.value').count()).toBe(2);
 
       pause();
-
-
-
     });
   });
 });

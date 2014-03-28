@@ -66,33 +66,35 @@
 		expect(item).not.toBeDefined();
 
 	});
+	describe('CanMove function', function ()
+{
+		it('should give canMove results with fusion up', function ()
+		{
+			gameService.init([{ x: 3, y: 3, v: 3 }, { x: 3, y: 2, v: 3 }]);
 
-	it('should give canMove results with fusion up', function ()
-	{
-		gameService.init([{ x: 3, y: 3, v: 3 }, { x: 3, y: 2, v: 3 },{ x: 3, y: 0, v: 3 },{ x: 1, y: 1, v: 3 }, { x: 2, y: 1, v: 3 }] );
+			// when fusion
+			var item0CanMoveUp = gameService.canMove(gameService._items[0], "up", true);
+			expect(item0CanMoveUp).toBe(true);
+			expect(gameService._items[0].fusion).toBe(true);
+			expect(gameService._items[0].destroy).toBe(false);
+			expect(gameService._items[1].fusion).toBe(false);
+			expect(gameService._items[1].destroy).toBe(true);
 
-		// when fusion
-		var item0CanMoveUp = gameService.canMove(gameService._items[0], "up");
-		expect(item0CanMoveUp).toBe(true);
-		expect(gameService._items[0].fusion).toBe(true);
-		expect(gameService._items[0].destroy).toBe(false);
-		expect(gameService._items[1].fusion).toBe(false);
-		expect(gameService._items[1].destroy).toBe(true);
+		});
 
-	});
+		it('should give canMove results when items cannot move', function ()
+		{
+			gameService.init([{ x: 3, y: 3, v: 3 }, { x: 3, y: 2, v: 3 }, { x: 3, y: 0, v: 3 }, { x: 1, y: 1, v: 3 }, { x: 2, y: 1, v: 3 }]);
 
-	it('should give canMove results when items cannot move', function ()
-	{
-		gameService.init([{ x: 3, y: 3, v: 3 }, { x: 3, y: 2, v: 3 }, { x: 3, y: 0, v: 3 }, { x: 1, y: 1, v: 3 }, { x: 2, y: 1, v: 3 }]);
+			// when cannot move
+			var item2CanMoveRight = gameService.canMove(gameService._items[1], "right", true);
+			expect(item2CanMoveRight).toBe(false);
+			expect(gameService._items[2].fusion).toBe(false);
+			expect(gameService._items[2].destroy).toBe(false);
+			var item0CanMoveDown = gameService.canMove(gameService._items[0], "down", true);
+			expect(item0CanMoveDown).toBe(false);
 
-		// when cannot move
-		var item2CanMoveRight = gameService.canMove(gameService._items[1], "right");
-		expect(item2CanMoveRight).toBe(false);
-		expect(gameService._items[2].fusion).toBe(false);
-		expect(gameService._items[2].destroy).toBe(false);
-		var item0CanMoveDown = gameService.canMove(gameService._items[0], "down");
-		expect(item0CanMoveDown).toBe(false);
-
+		});
 	});
 
 	it('should have right available squares data', function ()

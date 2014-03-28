@@ -49,10 +49,16 @@
 				}]
 			},
 			options: { spawn: false }
+		},
+
+		karma: {
+			unit: {
+				configFile: 'karma.conf.js'
+			}
 		}
 
 	});
 
 
-	grunt.registerTask('default', ['jshint', 'uglify:dist', 'cssmin', 'imagemin']);
+	grunt.registerTask('default', ['jshint', 'karma', 'uglify:dist', 'cssmin', 'imagemin']);
 };

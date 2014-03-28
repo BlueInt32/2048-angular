@@ -171,7 +171,7 @@
 		var adjacentItem = self.getAdjacentItem(item, direction);
 		if (typeof adjacentItem == 'undefined')
 			return true; // ... we can move this way.
-		console.log(adjacentItem);
+		//console.log(adjacentItem);
 		if (adjacentItem.v != item.v || adjacentItem.justFusionned || item.justFusionned || item.destroy)
 		{
 			return false;
