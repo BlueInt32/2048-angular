@@ -144,7 +144,6 @@
     <Content Include="js\gruntfile.js" />
     <Content Include="js\min.js" />
     <Content Include="js\package.json" />
-    <Content Include="js\services\gameService.js" />
     <Content Include="js\karma.conf.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
