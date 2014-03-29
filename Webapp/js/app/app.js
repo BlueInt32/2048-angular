@@ -60,10 +60,8 @@ app.controller('mainCtrl', ['$document', '$scope', 'gameService', 'gameServiceCo
 
 	$scope.sendMove = function (direction)
 	{
-		gameService.globalMove(direction, function () { $scope.$digest(); });
-
+		gameService.globalMove(direction, $scope.MoveDoneCallback);
 		$scope.updateScope();
-		$scope.$digest();
 	};
 
 	$scope.reInit = function ()
