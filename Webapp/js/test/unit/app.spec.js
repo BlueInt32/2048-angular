@@ -68,7 +68,7 @@
 		expect(items[0]).not.toBeDefined();
 
 	});
-	describe('CanMove function', function ()
+	describe('CanMove', function ()
 {
 		it('should give correct results with fusion up', function ()
 		{
@@ -76,11 +76,7 @@
 
 			// when fusion
 			var item0CanMoveUp = gameService.canMove(gameService._items[0], "up", true);
-			expect(item0CanMoveUp).toBe(true);
-			expect(gameService._items[0].fusion).toBe(true);
-			expect(gameService._items[0].destroy).toBe(false);
-			expect(gameService._items[1].fusion).toBe(false);
-			expect(gameService._items[1].destroy).toBe(true);
+			expect(item0CanMoveUp).toBe(false); // while items can move, they should move before fusion
 
 		});
 
@@ -123,16 +119,50 @@
 		expect(gameService._items[0].y).toBe(3);
 	});
 
-	it('should fusion items in the correct order', function ()
+	it('should fusion items in the correct order and direction (4 elements)', function ()
 	{
-		gameService.initFirstItems([{ x: 3, y: 1, v: 3 }, { x: 3, y: 0, v: 3 }, { x: 3, y: 2, v: 3 }, { x: 3, y: 3, v: 3 }]);
-		gameService.globalMove("down", null);
-		expect(gameService._items.length).toBe(2);
+		//gameService.initFirstItems([{ x: 3, y: 1, v: 3 }, { x: 3, y: 0, v: 3 }, { x: 3, y: 2, v: 3 }, { x: 3, y: 3, v: 3 }]);
+		//gameService.globalMove("down", null);
+		//expect(gameService._items.length).toBe(2);
 
 
 		gameService.initFirstItems([{ x: 3, y: 1, v: 3 }, { x: 3, y: 0, v: 3 }, { x: 3, y: 2, v: 3 }, { x: 3, y: 3, v: 3 }]);
 		gameService.globalMove("up", null);
 		expect(gameService._items.length).toBe(2);
+	});
+
+
+	it('should fusion items in the correct order and direction when (3 elements)', function ()
+	{
+		gameService.initFirstItems([{ x: 3, y: 2, v: 3 }, { x: 3, y: 1, v: 3 }, { x: 3, y: 0, v: 3 }]);
+		gameService.globalMove("up", null);
+		expect(gameService._items.length).toBe(2);
+		expect(gameService._items[0].v).toBe(3);
+		expect(gameService._items[1].v).toBe(6);
+		expect(gameService._items[0].y).toBe(1);
+		expect(gameService._items[1].y).toBe(0);
+	});
+
+	it('should fusion items in the correct order even when there are spaces with (3 elements)', function ()
+	{
+		gameService.initFirstItems([{ x: 0, y: 0, v: 2 }, { x: 1, y: 0, v: 2 }, { x: 3, y: 0, v: 2 }]);
+		gameService.globalMove("right", null);
+		expect(gameService._items.length).toBe(2);
+		expect(gameService._items[0].v).toBe(2);
+		expect(gameService._items[1].v).toBe(4);
+		expect(gameService._items[0].x).toBe(2);
+		expect(gameService._items[1].x).toBe(3);
+	});
+
+	it('shouldn\'t fusion items too much', function ()
+	{
+		gameService.initFirstItems([{ x: 3, y: 2, v: 8 }, { x: 3, y: 1, v: 4 }, { x: 3, y: 0, v: 4 }]);
+		gameService.globalMove("down", null);
+		expect(gameService._items.length).toBe(2);
+		expect(gameService._items[0].v).toBe(8);
+		expect(gameService._items[1].v).toBe(8);
+		expect(gameService._items[0].y).toBe(3);
+		expect(gameService._items[1].y).toBe(2);
 	});
 
 	it('should move items correctly', function ()

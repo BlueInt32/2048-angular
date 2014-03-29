@@ -80,6 +80,9 @@
     <Content Include="Content\css\mixin.css">
       <DependentUpon>mixin.less</DependentUpon>
     </Content>
+    <Content Include="Content\css\mixin.min.css">
+      <DependentUpon>mixin.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\styles.css">
       <DependentUpon>styles.less</DependentUpon>
     </Content>
@@ -100,6 +103,21 @@
     <Content Include="Content\images\elements\clock.png" />
     <Content Include="Content\images\elements\cup.png" />
     <Content Include="Content\images\elements\knickers.png" />
+    <Content Include="Content\images\elements\min\apple.png" />
+    <Content Include="Content\images\elements\min\barrel.png" />
+    <Content Include="Content\images\elements\min\book.png" />
+    <Content Include="Content\images\elements\min\capsule.png" />
+    <Content Include="Content\images\elements\min\chinaui.png" />
+    <Content Include="Content\images\elements\min\clock.png" />
+    <Content Include="Content\images\elements\min\cup.png" />
+    <Content Include="Content\images\elements\min\knickers.png" />
+    <Content Include="Content\images\elements\min\mobiletelephone.png" />
+    <Content Include="Content\images\elements\min\rokey.png" />
+    <Content Include="Content\images\elements\min\shovel.png" />
+    <Content Include="Content\images\elements\min\toiletpaper.png" />
+    <Content Include="Content\images\elements\min\toothpaste.png" />
+    <Content Include="Content\images\elements\min\vest.png" />
+    <Content Include="Content\images\elements\min\xxxx.png" />
     <Content Include="Content\images\elements\mobiletelephone.png" />
     <Content Include="Content\images\elements\rokey.png" />
     <Content Include="Content\images\elements\shovel.png" />
@@ -114,14 +132,18 @@
     <Content Include="js\bower.json" />
     <Content Include="js\bower_components\angular-animate\angular-animate.min.js.map" />
     <Content Include="js\bower_components\angular-animate\README.md" />
+    <Content Include="js\bower_components\angular-cookies\.bower.json" />
+    <Content Include="js\bower_components\angular-cookies\angular-cookies.js" />
+    <Content Include="js\bower_components\angular-cookies\angular-cookies.min.js" />
+    <Content Include="js\bower_components\angular-cookies\bower.json" />
     <Content Include="js\bower_components\angular-mocks\README.md" />
+    <Content Include="js\bower_components\angular-cookies\angular-cookies.min.js.map" />
+    <Content Include="js\bower_components\angular-cookies\README.md" />
     <None Include="js\test\e2e\runner.html" />
     <Content Include="js\bower_components\angular-animate\.bower.json" />
     <Content Include="js\bower_components\angular-animate\angular-animate.js" />
     <Content Include="js\bower_components\angular-animate\angular-animate.min.js" />
     <Content Include="js\bower_components\angular-animate\bower.json" />
-    <Content Include="js\bower_components\angular-cookie\.bower.json" />
-    <Content Include="js\bower_components\angular-cookie\angular-cookie.js" />
     <Content Include="js\bower_components\angular-mocks\.bower.json" />
     <Content Include="js\bower_components\angular-mocks\angular-mocks.js" />
     <Content Include="js\bower_components\angular-mocks\bower.json" />

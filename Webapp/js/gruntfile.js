@@ -14,6 +14,7 @@
 						: [
 							'bower_components/angular/angular.js',
 							'bower_components/angular-animate/angular-animate.js',
+							'bower_components/angular-cookies/angular-cookies.js',
 							'app/gameService.js',
 							'app/app.js',
 							'app/directives.js'

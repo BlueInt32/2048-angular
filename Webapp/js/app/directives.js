@@ -8,6 +8,6 @@
 			showvalue:"@"
 		},
 		replace:true,
-		template: "<div class='value x{{bounditem.x}} y{{bounditem.y}} v{{ bounditem.v }}'><div class='val' ng-if='showvalue'>{{bounditem.v}}</div></div>"
+		template: "<div class='value x{{bounditem.x}} y{{bounditem.y}} v{{ bounditem.v }}'><div class='val' ng-if='showvalue'>{{bounditem.v}}</div><div class='id' ng-if='showvalue'>{{bounditem.id}}</div></div>"
 	};
 });

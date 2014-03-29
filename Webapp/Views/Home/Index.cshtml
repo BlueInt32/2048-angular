@@ -12,7 +12,7 @@
 <body ng-app="app" ng-controller="mainCtrl as control">
 	<div id="container">
 		<h1>Angular 2048</h1>
-		<h3>Score : {{score}}</h3>
+		<h3>Score : {{score}} - Best Score : {{bestScore}}</h3>
 		<div ng-if="isGameOver" class="gameOverPopin">
 			<h1>Game Over</h1>
 			<p><a href="#" ng-click="reInit();">Recommencer</a></p>
@@ -20,7 +20,6 @@
 		<div id="game">
 			<square bounditem="item" ng-repeat="item in items" showvalue="{{showvalue}}">
 				@*<div class=" coord">[{{item.x}}-{{item.y}}]</div>*@
-
 			</square>
 			<div class="debug" ng-if="showDebug">
 				<ul>
@@ -33,6 +32,7 @@
 			<div class="commands" ng-init="directions=[{t:'left', v:'◄'}, {t:'right', v:'►'}, {t:'up', v:'▲'}, {t:'down', v:'▼'}]">
 				<input type="button" ng-repeat="dir in directions" value="{{dir.v}}" ng-click="sendMove(dir.t);" />
 				| <input type="checkbox" ng-model="showvalue" /> Montrer les valeurs
+				
 			</div>
 		</div>
 
@@ -40,7 +40,7 @@
 	{
 		<script src="~/js/bower_components/angular/angular.js"></script>
 		<script src="~/js/bower_components/angular-animate/angular-animate.js"></script>
-		<script src="~/js/bower_components/angular-cookie/angular-cookie.js"></script>
+		<script src="~/js/bower_components/angular-cookies/angular-cookies.js"></script>
 		<script src="~/js/app/gameService.js"></script>
 		<script src="~/js/app/app.js"></script>
 		<script src="~/js/app/directives.js"></script>

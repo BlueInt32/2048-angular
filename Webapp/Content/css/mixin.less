@@ -16,19 +16,34 @@
 @linkColorhover: #26a0ce;
 
 @textColor2: rgba(181, 183, 190, 0.5);
-@textColor4: rgba(106, 119, 158, 0.5);
-@textColor8: rgba(150, 171, 232, 0.5);
-@textColor16: rgba(98, 152, 237, 0.5);
-@textColor32: rgba(69, 165, 196, 0.5);
-@textColor64: rgba(21, 177, 235, 0.5);
-@textColor128: rgba(30, 238, 251, 0.5);
-@textColor256: rgba(0, 255, 138, 0.5);
-@textColor512: rgba(18, 255, 0, 0.5);
-@textColor1024: rgba(190, 255, 0, 0.5);
-@textColor2048: rgba(255, 158, 4, 0.5);
-@textColor4096: rgba(237, 65, 33, 0.5);
-@textColor8192: rgba(255, 0, 0, 0.5);
+@textColor4: rgba(150, 171, 232, 0.5);
+@textColor8: rgba(69, 165, 196, 0.5);
+@textColor16: rgba(30, 238, 251, 0.5);
+@textColor32: rgba(0, 255, 138, 0.5);
+@textColor64: rgba(84, 255, 0, 0.5);
+@textColor128: rgba(255, 158, 4, 0.5);
+@textColor256: rgba(255, 0, 0, 0.5);
+@textColor512: rgba(255, 87, 154, 0.5);
+@textColor1024: rgba(255, 0, 252, 0.5);
+@textColor2048: rgba(84, 0, 255, 0.5);
+@textColor4096: rgba(255, 255, 255, 0.5);
+@textColor8192: rgba(0, 0, 0, 0.5);
 @squareColor : rgba(187, 199, 232, 0.5);
+
+@textColor2_: rgb(181, 183, 190);
+@textColor4_: rgb(150, 171, 232);
+@textColor8_: rgb(69, 165, 196);
+@textColor16_: rgb(30, 238, 251);
+@textColor32_: rgb(0, 255, 138);
+@textColor64_: rgb(84, 255, 0);
+@textColor128_: rgb(255, 158, 4);
+@textColor256_: rgb(255, 0, 0);
+@textColor512_: rgb(255, 87, 154);
+@textColor1024_: rgb(255, 0, 252);
+@textColor2048_: rgb(84, 0, 255);
+@textColor4096_: rgb(255, 255, 255);
+@textColor8192_: rgb(0, 0, 0);
+@squareColor_ : rgb(187, 199, 232);
 
 @squareSize: 120px;
 @gifSize: 32px;
@@ -38,7 +53,7 @@
 @siteWidth: 1140px;
 
 
-.boxshadow(@x: 0; @y: 0; @blur: 0; @spread: 0; @color: rgba(0,0,0,0.075); @type:inset)
+.boxshadow(@x: 0; @y: 0; @blur: 0; @spread: 0; @color: rgba(0,0,0,0.075); @type:outset)
 {
     -webkit-box-shadow: @arguments;
     -moz-box-shadow: @arguments;
