@@ -34,6 +34,7 @@ app.controller('mainCtrl', ['$document', '$scope', 'gameService', 'gameServiceCo
 		gameService._stepbystepMode = $scope.stepbystepMode;
 		if (!$scope.isGameOver)
 		{
+			console.log(event.which)
 			switch (event.which)
 			{
 				case 37: gameService.globalMove("left", $scope.MoveDoneCallback); break;

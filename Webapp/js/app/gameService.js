@@ -170,10 +170,10 @@
 		// test if item is on the edge (it's false result directly)
 		switch (direction)
 		{
-			case "left": if(item.x === 3) specialPosition = true; if (item.x === 0) return false;break;
-			case "right": if (item.x === 0) specialPosition = true; if (item.x == 3) return false; break;
-			case "up": if (item.y === 3) specialPosition = true; if (item.y === 0) return false; break;
-			case "down": if (item.y === 0) specialPosition = true; if (item.y == 3) return false; break;
+			case "left": if(item.x === 3) specialPosition = true; if (item.x === 0) return false;
+			case "right": if (item.x === 0) specialPosition = true; if (item.x == 3) return false; 
+			case "up": if (item.y === 3) specialPosition = true; if (item.y === 0) return false; 
+			case "down": if (item.y === 0) specialPosition = true; if (item.y == 3) return false; 
 		}
 
 		// then test is some other element is there

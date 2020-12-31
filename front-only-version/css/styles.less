@@ -1,0 +1,141 @@
+﻿@import "mixin.less";
+@import "offsets.less";
+@import "values.less";
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: sans-serif;
+	
+	div#container {
+		font-family: verdana;
+		position: relative;
+		margin: auto auto;
+		width: 500px;
+
+		div#game {
+			position: relative;
+
+			.debug {
+				left: 580px;
+				height: 600px;
+				border: 1px solid black;
+				width: 300px;
+				position: absolute;
+					.borderradius(5px);
+				font-family:'consolas';
+			}
+
+			div.backgroundTiles {
+				div {
+					margin: 0px 2px 2px 0px;
+					background-color: @squareColor;
+					float: left;
+					width: @squareSize;
+					height: @squareSize;
+					.borderradius(5px);
+				}
+			}
+
+			div.value {
+				display: block;
+				padding: 0px;
+				position: absolute;
+				width: @squareSize;
+				height: @squareSize;
+				//border:1px solid black;
+				.borderradius(5px);
+				transition: 0.1s ease-in-out all;
+				background-repeat : no-repeat;
+				background-position: 50%;
+				//background-color: rgba(255, 255, 255, 0.3);
+				div.coord {
+					font-size: 8px;
+				}
+
+				div.val {
+					margin: 3px;
+					color: inherit;
+					font-size: 0.5e;
+				}
+				div.id {
+					margin: -22px 3px 3px 101px;
+					color: inherit;
+					font-size: 0.5e;
+				}
+
+				&.ng-enter,
+				&.ng-leave,
+				&.ng-move {
+					transition: 0.1s ease-in-out all;
+				}
+
+				&.ng-enter {
+					opacity: 0;
+				}
+
+				&.ng-enter.ng-enter-active {
+					opacity: 1;
+				}
+
+				&.ng-leave {
+					opacity: 1;
+				}
+
+				&.ng-leave.ng-leave-active {
+					opacity: 0;
+				}
+
+				&.ng-move {
+					opacity: 0.5;
+					background-color: #F00;
+				}
+
+					&.ng-move.ng-move-active {
+						opacity: 1;
+						background-color: #F00;
+					}
+			}
+		}
+
+		input.smallInput {
+			width: 50px;
+		}
+		.gameOverPopin 
+		{
+			position: fixed;
+            z-index: 100000;
+            top: 100px;
+            width: 600px;
+			height:150px;
+			padding:30px;
+			text-align:center;
+            left: 50%;
+            margin-left: -300px; /* Width / 2 */
+            background-color: #fff;
+            font-size: 1.2em;
+            overflow: hidden;
+            padding-bottom: 10px;
+            border:1px solid #555;
+			.borderradius(5px);
+			.boxshadow(1px; 1px; 8px; 1px; #767676);
+            font-size:14px;
+
+			&.ng-enter,
+			&.ng-leave {
+				transition: 0.3s ease-in-out all;
+			}
+			&.ng-enter {opacity: 0;	}
+			&.ng-enter.ng-enter-active {opacity: 1;	}
+			&.ng-leave {opacity: 1;	}
+			&.ng-leave.ng-leave-active {opacity: 0;	}
+			
+			p{ margin:25px; a {color:@linkColor; text-decoration:none; &:hover {color:@linkColorhover; }}}
+			a.closePopin{ float:right; margin:4px 10px; }
+
+		}
+
+	}
+}
